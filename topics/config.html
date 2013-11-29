@@ -1,0 +1,122 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>Redis中文资料站</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <article id='topic'>
+        <h1>Redis configuration</h1>
+        
+        <p>Redis is able to start without a configuration file using a built-in default
+        configuration, however this setup is only recommanded for testing and
+        development purposes.</p>
+        
+        <p>The proper way to configure Redis is by providing a Redis configuration file,
+        usually called <code>redis.conf</code>.</p>
+        
+        <p>The <code>redis.conf</code> file contains a number of directives that have a very simple
+        format:</p>
+        
+        <pre><code>keyword argument1 argument2 ... argumentN&#x000A;</code></pre>
+        
+        <p>This is an example of configuration directive:</p>
+        
+        <pre><code>slaveof 127.0.0.1 6380&#x000A;</code></pre>
+        
+        <p>It is possible to provide strings containing spaces as arguments using
+        quotes, as in the following example:</p>
+        
+        <pre><code>requirepass &quot;hello world&quot;&#x000A;</code></pre>
+        
+        <p>The list of configuration directives, and their meaning and intended usage
+        is available in the self documented example redis.conf shipped into the
+        Redis distribution.</p>
+        
+        <ul>
+        <li>The self documented <a href="https://raw.github.com/antirez/redis/2.6/redis.conf">redis.conf for Redis 2.6</a>.</li>
+        <li>The self documented <a href="https://raw.github.com/antirez/redis/2.4/redis.conf">redis.conf for Redis 2.4</a>.</li>
+        </ul>
+        
+        <h2>Passing arguments via command line</h2>
+        
+        <p>Since Redis 2.6 it is possible to also pass Redis configuration parameters
+        using the command line directly. This is very useful for testing purposes.
+        The following is an example that stats a new Redis instance using port 6380
+        as a slave of the instance running at 127.0.0.1 port 6379.</p>
+        
+        <pre><code>./redis-server --port 6380 --slaveof 127.0.0.1 6379&#x000A;</code></pre>
+        
+        <p>The format of the arguments passed via the command line is exactly the same
+        as the one used in the redis.conf file, with the exception that the keyword
+        is prefixed with <code>--</code>.</p>
+        
+        <p>Note that internally this generates an in-memory temporary config file
+        (possibly concatenating the config file passed by the user if any) where
+        arguments are translated into the format of redis.conf.</p>
+        
+        <h2>Changing Redis configuration while the server is running</h2>
+        
+        <p>It is possible to reconfigure Redis on the fly without stopping and restarting
+        the service, or querying the current configuration programmatically using the
+        special commands <a href="/commands/config-set.html">CONFIG SET</a> and
+        <a href="/commands/config-get.html">CONFIG GET</a></p>
+        
+        <p>Not all the configuration directives are supported in this way, but most
+        are supported as expected. Please refer to the
+        <a href="/commands/config-set.html">CONFIG SET</a> and <a href="/commands/config-get.html">CONFIG GET</a>
+        pages for more information.</p>
+        
+        <p>Note that modifying the configuration on the fly <strong>has no effects on the
+        redis.conf file</strong> so at the next restart of Redis the old configuration will
+        be used instead.</p>
+        
+        <p>Make sure to also modify the <code>redis.conf</code> file accordingly to the configuration
+        you set using <a href="/commands/config-set.html">CONFIG SET</a>.
+        There are plans to provide a <code>CONFIG REWRITE</code>
+        command that will be able to run the <code>redis.conf</code> file rewriting the
+        configuration accordingly to the current server configuration, without modifying
+        the comments and the structure of the current file.</p>
+        
+        <h2>Configuring Redis as a cache</h2>
+        
+        <p>If you plan to use Redis just as a cache where every key will have an
+        expire set, you may consider using the following configuration instead
+        (assuming a max memory limit of 2 megabytes as an example):</p>
+        
+        <pre><code>maxmemory 2mb&#x000A;maxmemory-policy allkeys-lru&#x000A;</code></pre>
+        
+        <p>In this configuration there is no need for the application to set a
+        time to live for keys using the <a href="/commands/expire.html">EXPIRE</a> command (or equivalent) since
+        all the keys will be evicted using an approximated LRU algorithm as long
+        as we hit the 2 megabyte memory limit.</p>
+        
+        <p>This is more memory effective as setting expires on keys uses additional
+        memory. Also an LRU behavior is usually to prefer compared to a fixed expire
+        for every key, so that the <em>working set</em> of your data (the keys that are
+        used more frequently) will likely last more.</p>
+        
+        <p>Basically in this configuration Redis acts in a similar way to memcached.</p>
+        
+        <p>When Redis is used as a cache in this way, if the application also requires
+        the use Redis as a store, it is strongly suggested to create two Redis
+        instances, one as a cache, configured in this way, and one as a store,
+        configured accordingly to your persistence needs and only holding keys
+        that are not about cached data.</p>
+        
+        <p><em>Note:</em> The user is adviced to read the example redis.conf to check how the
+        other maxmemory policies available work.</p>
+      </article>
+    </div>
+    <script src='/js/foot.js'></script>
+  </body>
+</html>

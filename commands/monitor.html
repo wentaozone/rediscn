@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+          <p><strong>时间复杂度：</strong> </p>
+        </div>
+        
+        <p><a href="/commands/monitor.html">MONITOR</a> 是一个调试命令，返回服务器处理的每一个命令，它能帮助我们了解在数据库上发生了什么操作，可以通过<code>redis-cli</code>和<code>telnet</code>命令使用.</p>
+        <pre><code>$ redis-cli monitor&#x000A;1339518083.107412 [0 127.0.0.1:60866] &quot;keys&quot; &quot;*&quot;&#x000A;1339518087.877697 [0 127.0.0.1:60866] &quot;dbsize&quot;&#x000A;1339518090.420270 [0 127.0.0.1:60866] &quot;set&quot; &quot;x&quot; &quot;6&quot;&#x000A;1339518096.506257 [0 127.0.0.1:60866] &quot;get&quot; &quot;x&quot;&#x000A;1339518099.363765 [0 127.0.0.1:60866] &quot;del&quot; &quot;x&quot;&#x000A;1339518100.544926 [0 127.0.0.1:60866] &quot;get&quot; &quot;x&quot;&#x000A;</code></pre>
+        
+        <p>使用<code>SIGINT</code> (Ctrl-C)来停止 通过<code>redis-cli</code>使用<a href="/commands/monitor.html">MONITOR</a> 命令返回的输出.</p>
+        
+        <pre><code>$ telnet localhost 6379&#x000A;Trying 127.0.0.1...&#x000A;Connected to localhost.&#x000A;Escape character is &#39;^]&#39;.&#x000A;MONITOR&#x000A;+OK&#x000A;+1339518083.107412 [0 127.0.0.1:60866] &quot;keys&quot; &quot;*&quot;&#x000A;+1339518087.877697 [0 127.0.0.1:60866] &quot;dbsize&quot;&#x000A;+1339518090.420270 [0 127.0.0.1:60866] &quot;set&quot; &quot;x&quot; &quot;6&quot;&#x000A;+1339518096.506257 [0 127.0.0.1:60866] &quot;get&quot; &quot;x&quot;&#x000A;+1339518099.363765 [0 127.0.0.1:60866] &quot;del&quot; &quot;x&quot;&#x000A;+1339518100.544926 [0 127.0.0.1:60866] &quot;get&quot; &quot;x&quot;&#x000A;QUIT&#x000A;+OK&#x000A;Connection closed by foreign host.&#x000A;</code></pre>
+        
+        <p>使用 <a href="/commands/quit.html">QUIT</a>命令来停止通过<code>telnet</code>使用<a href="/commands/monitor.html">MONITOR</a>返回的输出.</p>
+        <h2><a href="/commands/monitor.html">MONITOR</a> 性能消耗</h2>
+        
+        <p>由于<a href="/commands/monitor.html">MONITOR</a>命令返回 服务器处理的<strong>所有的</strong> 命令, 所以在性能上会有一些消耗.</p>
+        
+        <p>在<strong>不运行</strong> <a href="/commands/monitor.html">MONITOR</a> 命令的情况下，benchmark的测试结果:</p>
+        
+        <pre><code>$ src/redis-benchmark -c 10 -n 100000 -q&#x000A;PING_INLINE: 101936.80 requests per second&#x000A;PING_BULK: 102880.66 requests per second&#x000A;SET: 95419.85 requests per second&#x000A;GET: 104275.29 requests per second&#x000A;INCR: 93283.58 requests per second&#x000A;</code></pre>
+        
+        <p>在<strong>运行</strong> <a href="/commands/monitor.html">MONITOR</a> 命令的情况下，benchmark的测试结果: (<code>redis-cli monitor &gt; /dev/null</code>):</p>
+        
+        <pre><code>$ src/redis-benchmark -c 10 -n 100000 -q&#x000A;PING_INLINE: 58479.53 requests per second&#x000A;PING_BULK: 59136.61 requests per second&#x000A;SET: 41823.50 requests per second&#x000A;GET: 45330.91 requests per second&#x000A;INCR: 41771.09 requests per second&#x000A;</code></pre>
+        
+        <p>在这种特定的情况下，运行一个 <a href="/commands/monitor.html">MONITOR</a> 命令能够降低50%的吞吐量，运行多个<a href="/commands/monitor.html">MONITOR</a>命令 降低的吞吐量更多.</p>
+        
+        <h2>返回值</h2>
+        
+        <p><strong>没有统一标准的返回值</strong>, 无限的返回服务器端处理的命令流.</p>
+        
+      </article>
+    </div>
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();  // = 'http://redis.cn/commands/'+curCommandObj.key;
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>

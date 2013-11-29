@@ -1,0 +1,228 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>Redis命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+	<div class='text'>
+      <article id='topic'>
+        <h1>协议说明</h1>
+        
+        <p>Redis协议在以下几点之间做出了折衷：</p>
+        
+        <ul>
+        <li>简单的实现</li>
+        <li>快速地被计算机解析</li>
+        <li>简单得可以能被人工解析</li>
+        </ul>
+        
+        
+        <h2>网络层</h2>
+        
+        <p>Redis在TCP端口6379上监听到来的连接，客户端连接到来时，Redis服务器为此创建一个TCP连接。在客户端与服务器端之间传输的每个Redis命令或者数据都以<code>\r\n</code>结尾。</p>
+        
+        <h2>请求</h2>
+        
+        <p>Redis接收由不同参数组成的命令。一旦收到命令，将会立刻被处理，并回复给客户端。</p>
+        
+        <h2>新的统一请求协议</h2>
+        
+        <p>新的统一协议已在Redis 1.2中引入，但是在Redis 2.0中，这就成为了与Redis服务器通讯的标准方式。</p>
+        
+        <p>在这个统一协议里，发送给Redis服务端的所有参数都是二进制安全的。以下是通用形式：</p>
+        
+        <pre><code>*&lt;number of arguments&gt; CR LF&#x000A;$&lt;number of bytes of argument 1&gt; CR LF&#x000A;&lt;argument data&gt; CR LF&#x000A;...&#x000A;$&lt;number of bytes of argument N&gt; CR LF&#x000A;&lt;argument data&gt; CR LF&#x000A;</code></pre>
+        
+        <p>例子如下：</p>
+        
+        <pre><code>*3&#x000A;$3&#x000A;SET&#x000A;$5&#x000A;mykey&#x000A;$7&#x000A;myvalue&#x000A;</code></pre>
+        
+        <p>上面的命令看上去像是单引号字符串，所以可以在查询中看到每个字节的准确值：</p>
+        
+        <pre><code>"*3\r\n$3\r\nSET\r\n$5\r\nmykey\r\n$7\r\nmyvalue\r\n"&#x000A;</code></pre>
+        
+        <p>
+        	在Redis的回复中也使用这样的格式。批量回复时，这种格式用于每个参数<code>$6\r\nmydata\r\n</code>。
+        	实际的统一请求协议是Redis用于返回列表项，并调用 <a href="/topics/protocol.html#multi-bulk-reply">Multi-bulk</a>回复。
+        	仅仅是N个以以<code>*&lt;argc&gt;\r\n</code>为前缀的不同批量回复，<code>&lt;argc&gt;</code>是紧随的参数（批量回复）数目。
+        </p>
+        
+        <h2>回复</h2>
+        
+        <p>Redis用不同的回复类型回复命令。它可能从服务器发送的第一个字节开始校验回复类型：</p>
+        
+        <ul>
+        <li>用单行回复，回复的第一个字节将是“+”</li>
+        <li>错误消息，回复的第一个字节将是“-”</li>
+        <li>整型数字，回复的第一个字节将是“:”</li>
+        <li>批量回复，回复的第一个字节将是“$”</li>
+        <li>多个批量回复，回复的第一个字节将是“<code>*</code>”</li>
+        </ul>
+        
+        
+        <p><a name="status-reply"></a></p>
+        
+        <h2>状态回复</h2>
+        
+        <p>状态回复（或者单行回复）以“+”开始以“\r\n”结尾的单行字符串形式。例如：</p>
+        
+        <pre><code>+OK&#x000A;</code></pre>
+        
+        <p>客户端库将在“+”后面返回所有数据，正如上例中字符串“OK”一样。</p>
+        
+        <h2>错误回复</h2>
+        
+        <p>错误回复发送类似于状态回复。唯一的不同是第一个字节用“-”代替“+”。</p>
+        <p>错误回复仅仅在一些意料之外的事情发生时发送，例如：如果你试图执行一个操作来应付错误的数据类型，或者如果命令不存在等等。所以当收到一个错误回复时，客户端将会出现一个异常。
+        </p>
+        
+        <p><a name="integer-reply"></a></p>
+        
+        <h2>整型回复</h2>
+        
+        <p>这种回复类型只是用CRLF结尾字符串来表示整型，用一个字节的“：”作为前缀。例如：“：0\r\n”，或者“:1000\r\n”是整型回复。</p>
+        
+        <p>像INCR或者LASTAVE命令用整型回复作为实际回复值，此时对于返回的整型没有特殊的意思。它仅仅是为INCR、LASTSAVE的UNIX时间等增加数值。</p>
+        
+        <p>一些命令像EXISTS将为true返回1，为false返回0。</p>
+        
+        <p>其它命令像SADD、SREM和SETNX如果操作实际完成了的话将返回1，否则返回0。</p>
+        
+        <p>接下来的命令将回复一个整型回复：SETNX、DEL、EXISTS、INCR、INCRBY、DECR、DECRBY、DBSIZE、LASTSAVE、RENAMENX、MOVE、LLEN、SADD、SREM、SISMEMBER、SCARD。</p>
+        
+        <p><a name="nil-reply"></a>
+        <a name="bulk-reply"></a></p>
+        
+        <h2>批量回复（Bulk replies）</h2>
+        
+        <p>批量回复被服务器用于返回一个单二进制安全字符串。</p>
+        
+        <pre><code>C: GET mykey&#x000A;S: $6\r\nfoobar\r\n&#x000A;</code></pre>
+        
+        <p>服务器发送第一行回复，该行以“$”开始后面跟随实际要发送的字节数，随后是CRLF，然后发送实际数据，随后是2个字节的额外数据用于最后的CRLF。服务器发送的准确序列如下：</p>
+        
+        <pre><code>"$6\r\nfoobar\r\n"&#x000A;</code></pre>
+        
+        <p>如果请求的值不存在，批量回复将使用特殊的值-1来作为数据长度，例如：</p>
+        
+        <pre><code>C: GET nonexistingkey&#x000A;S: $-1&#x000A;</code></pre>
+        
+        <p>当请求的对象不存在时，客户端库API不会返回空字符串，而会返回空对象。例如：Ruby库返回‘nil’，而C库返回NULL（或者在回复的对象里设置指定的标志）等等。</p>
+        
+        <p><a name="multi-bulk-reply"></a></p>
+        
+        <h2>多批量回复（Multi-bulk replies）</h2>
+        
+        <p>像命令LRNGE需要返回多个值（列表的每个元素是一个值，而LRANGE需要返回多于一个单元素）。使用多批量写是有技巧的，用一个初始行作为前缀来指示多少个批量写紧随其后。批量回复的第一个字节总是<code>*</code>，例如：</p>
+        
+        <pre><code>C: LRANGE mylist 0 3&#x000A;s: *4&#x000A;s: $3&#x000A;s: foo&#x000A;s: $3&#x000A;s: bar&#x000A;s: $5&#x000A;s: Hello&#x000A;s: $5&#x000A;s: World&#x000A;</code></pre>
+        
+        <p>正如您可以看到的多批量回复是以完全相同的格式使用Redis统一协议将命令发送给服务器。</p>
+        
+        <p>服务器发送的第一行是<code>*4\r\n</code>，用于指定紧随着4个批量回复。然后传送每个批量写。</p>
+        <p>
+				如果指定的键不存在，则该键被认为是持有一个空的列表，且数值0被当作多批量计数值来发送，例如：
+				</p>
+        
+        
+        <pre><code>C: LRANGE nokey 0 1&#x000A;S: *0&#x000A;</code></pre>
+        
+        <p>当<a href="/commands/blpop.html">BLPOP</a>命令超时时，它返回nil多批量回复。这种类型多批量回复的计数器是<code>-1</code>，且值被当作nil来解释。例如：</p>
+        
+        <pre><code>C: BLPOP key 1&#x000A;S: *-1&#x000A;</code></pre>
+        
+        <p>
+        当这种情况发生时，客户端库API将返回空nil对象，且不是一个空列表。这必须有别于空列表和错误条件（例如：<a href="/commands/blpop.html">BLPOP</a>命令的超时条件）。
+        </p>
+        
+        <h2>多批量回复中的Nil元素</h2>
+        
+        <p>多批量回复的单元素长度可能是-1，为了发出信号这个元素被丢失且不是空字符串。这种情况发送在SORT命令时，此时使用GET模式选项且指定的键丢失。一个多批量回复包含一个空元素的例子如下：</p>
+        
+        <pre><code>S: *3&#x000A;S: $3&#x000A;S: foo&#x000A;S: $-1&#x000A;S: $3&#x000A;S: bar&#x000A;</code></pre>
+        
+        <p>第二个元素是空。客户端库返回如下:</p>
+        
+        <pre><code>["foo",nil,"bar"]&#x000A;</code></pre>
+        
+        <h2>多命令和管道</h2>
+        
+        <p>客户端能使用同样条件为了发出多个命令。管道用于支持多命令能够被客户端用单写操作来发送，它不需要为了发送下一条命令而读取服务器的回复。所有回复都能在最后被读出。</p>
+        
+        <p>通常Redis服务器和客户端拥有非常快速的连接，所以在客户端的实现中支持这个特性不是那么重要，如果一个应用需要在短时间内发出大量的命令，管道仍然会非常快。</p>
+        
+        <h2>旧协议发送命令</h2>
+        
+        <p>在统一请求协议出现前，Redis用不同的协议发送命令，现在仍然支持，它简单通过手动telnet。在这种协议中，有两种类型的命令：</p>
+        
+        <ul>
+        <li>内联命令：简单命令其参数用空格分割字符串。非二进制安全。</li>
+        <li>批量命令：批量命令准确如内联命令，但是最后的参数用特殊方式来处理用于保证最后参数二进制安全。</li>
+        </ul>
+        
+        
+        <h2>内联命令</h2>
+        
+        <p>最简单的发送Redis命令的方式是通过内联命令。下面是一个使用内联命令聊天的服务器/客户端的例子（服务器聊天用S:开始，客户端聊天用C:开始）。</p>
+        
+        <pre><code>C: PING&#x000A;S: +PONG&#x000A;</code></pre>
+        
+        <p>下面是另外一个内联命令返回整数的例子：</p>
+        
+        <pre><code>C: EXISTS somekey&#x000A;S: :0&#x000A;</code></pre>
+        
+        <p>因为‘somekey’不存在，所以服务器返回‘:0’。</p>
+        
+        <p>注意：EXISTS命令带有一个参数。参数用空格分割。</p>
+        
+        <h2>批量命令</h2>
+        
+        <p>一些命令当用内联命令发送时需要一种特殊的格式用于支持最后参数二进制安全。这种命令用最后参数作为“字节计数器”，然后发送批量数据（因为服务器知道读取多少个字节，所以是二进制安全的）。</p>
+        
+        <p>请看下面的例子：</p>
+        
+        <pre><code>C: SET mykey 6&#x000A;C: foobar&#x000A;S: +OK&#x000A;</code></pre>
+        
+        <p>这条命令的最后一个参数是‘6’。这用于指定随后数据的字节数，即字符串“foobar”。注意：虽然这个字节流是以额外的两个CRLF字节结尾的。</p>
+        
+        <p>所有批量命令都是用这种准确的格式：用随后数据的字节数代替最后一个参数，紧跟着后面是组成参数本身的字节和CRLF。为了更清楚程序，下面是通过客户端发送字符串的例子：</p>
+        
+        <pre><code>"SET mykey 6\r\nfoobar\r\n"&#x000A;</code></pre>
+        
+        <p>Redis有一个内部列表，用于表示哪些命令是内联，哪些命令是批量，所以你不得不发送相应的命令。强烈建议使用新的统一请求协议来代替老的协议。</p>
+      </article>
+    </div>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+    <script src='/js/foot.js'></script>
+  </body>
+</html>

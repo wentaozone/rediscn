@@ -1,0 +1,11 @@
+﻿请各位同学翻译前先将自己准备翻译的页面在这里登记一下，以免大家同时翻译同一个，浪费了大家宝贵的时间
+翻译完成后及时修改状态，状态有 翻译中/翻译完成/已更新 
+
+备注格式如下:
+
+地址         			昵称    预计完成时间  当前状态
+/index.html			geelou    2013-10-10    已更新
+/commands/dump.html     	阿昊      2013-09-29    已更新
+/commands/expireat.html 	阿昊      2013-09-29    已更新
+/commands/migrate.html.html     阿昊      2013-09-29    已更新
+/commands/Lists的所有command    A-wu    2013-10-31    翻译中

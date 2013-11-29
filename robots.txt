@@ -1,0 +1,5 @@
+# robots.txt generated at http://tool.chinaz.com/robots/ 
+User-agent: *
+Disallow: 
+Sitemap: http://redis.cn/sitemap.xml
+Sitemap: http://www.redis.cn/sitemap.xml

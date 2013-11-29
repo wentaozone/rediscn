@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+          <p><strong>时间复杂度：</strong> O(1)，不考虑拷贝新字符串的开销。通常这个字符串非常小，所以均摊代价为O(1)。如果考虑的话，复杂度就是O(M)，M是参数value的长度。</p>
+        </div>
+        
+        <p>
+这个命令的作用是覆盖key对应的string的一部分，从指定的offset处开始，覆盖value的长度。如果offset比当前key对应string还要长，那这个string后面就补0以达到offset。不存在的keys被认为是空字符串，所以这个命令可以确保key有一个足够大的字符串，能在offset处设置value。
+</p>
+<p>注意，offset最大可以是2<sup>29</sup>-1(536870911),因为redis字符串限制在512M大小。如果你需要超过这个大小，你可以用多个keys。
+</p>
+<p>警告：当set最后一个字节并且key还没有一个字符串value或者其value是个比较小的字符串时，Redis需要立即分配所有内存，这有可能会导致服务阻塞一会。在一台2010MacBook Pro上，set536870911字节（分配512MB）需要～300ms，set134217728字节(分配128MB)需要～80ms，set33554432比特位（分配32MB）需要～30ms，set8388608比特（分配8MB）需要8ms。注意，一旦第一次内存分配完，后面对同一个key调用<a href="/commands/setrange.html">SETRANGE</a>就不会预先得到内存分配。
+</p>
+<h2>模式</h2>
+<p>
+正因为有了<a href="/commands/setrange.html">SETRANGE</a>和类似功能的<a href="/commands/getrange.html">GETRANGE</a>命令，你可以把Redis的字符串当成线性数组，随机访问只要O(1)复杂度。这在很多真实场景应用里非常快和高效。
+
+</p>
+        
+        <h2>返回值</h2>
+        
+        <p><a href="/topics/protocol.html#integer-reply">数字</a>：该命令修改后的字符串长度</p>
+        
+        <h2>列子</h2>
+        <p>基本使用方法:</p>
+         <div class='example' data-session='048148fc00ef24c8b2af12914fac8015'>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>SET key1 "Hello World"</span>
+          <pre>OK</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>SETRANGE key1 6 "Redis"</span>
+          <pre>(integer) 11</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>GET key1</span>
+          <pre>"Hello Redis"</pre><form>
+            <span class='monospace prompt'>redis>&nbsp;</span>
+            <input autocomplete='off' name='command' spellcheck='false' type='text' />
+          </form></div>
+		  
+		  <p>补0的例子:</p>
+        
+        <div class='example' data-session='048148fc00ef24c8b2af12914fac8015'>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>SETRANGE key2 6 "Redis"</span>
+          <pre>(integer) 11</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>GET key2</span>
+          <pre>"\x00\x00\x00\x00\x00\x00Redis"</pre><form>
+            <span class='monospace prompt'>redis>&nbsp;</span>
+            <input autocomplete='off' name='command' spellcheck='false' type='text' />
+          </form></div>
+        
+      </article>
+    </div>
+    
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>

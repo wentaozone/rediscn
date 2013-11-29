@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+          <p><strong>时间复杂度：</strong> O(log(N)),N是有序集合中元素的个数。</p>
+        </div>
+        
+        <p>
+该命令添加指定的成员到key对应的有序集合中，每个成员都有一个分数。你可以指定多个分数/成员组合。如果一个指定的成员已经在对应的有序集合中了，那么其分数就会被更新成最新的，并且该成员会重新调整到正确的位置，以确保集合有序。如果key不存在，就会创建一个含有这些成员的有序集合，就好像往一个空的集合中添加一样。如果key存在，但是它并不是一个有序集合，那么就返回一个错误。
+</p><p>分数的值必须是一个表示数字的字符串，并且可以是double类型的浮点数。
+</p><p>对于有序集合的介绍，可以参考sorted sets页面。</p>
+        
+        
+        <h2>返回值</h2>
+        
+      <p><a href="/topics/protocol.html#integer-reply">整数</a>, 如下整数:</p>
+        
+        <ul>
+        <li>返回添加到有序集合中元素的个数，不包括那种已经存在只是更新分数的元素。</li>
+        </ul>
+        
+        
+        <h2>历史</h2>
+        
+        <ul>
+        <li><code>&gt;= 2.4</code>: 接受多个元素。在redis 2.4之前的版本中，每次只能添加或者更新一个元素。</li>
+        </ul>
+		
+        <h2>列子</h2>
+        
+        <div class='example' data-session='456d32e96fefea88c174b38469d0d34e'>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZADD myzset 1 "one"</span>
+          <pre>(integer) 1</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZADD myzset 1 "uno"</span>
+          <pre>(integer) 1</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZADD myzset 2 "two"</span>
+          <pre>(integer) 1</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZADD myzset 3 "two"</span>
+          <pre>(integer) 0</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZRANGE myzset 0 -1 WITHSCORES</span>
+          <pre>1) "one"&#x000A;2) "1"&#x000A;3) "uno"&#x000A;4) "1"&#x000A;5) "two"&#x000A;6) "3"</pre><form>
+            <span class='monospace prompt'>redis>&nbsp;</span>
+            <input autocomplete='off' name='command' spellcheck='false' type='text' />
+          </form></div>
+        
+      </article>
+    </div>
+    
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>

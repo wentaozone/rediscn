@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+          <p><strong>时间复杂度：</strong> <span class="math">O(1).</span> The amortized time complexity is <span class="math">O(1) </span>因为redis用的动态字符串的库在每次分配空间的时候会增加一倍的可用空闲空间，所以在添加的value较小而且已经存在的 value是任意大小的情况下，均摊时间复杂度是<span class="math">O(1) </span>。</p>
+        </div>
+        
+        <p>如果 <code>key</code> 已经存在，并且值为字符串，那么这个命令会把 <code>value</code> 追加到原来值（value）的结尾。
+        如果 <code>key</code> 不存在，那么它将首先创建一个空字符串的key，再执行追加操作，这种情况 <a href="/commands/append.html">APPEND</a>
+        将类似于 <a href="/commands/set.html">SET</a> 操作。</p>
+        
+        <h2>返回值</h2>
+        
+        <p><a href="/topics/protocol.html#integer-reply">整数回复（Integer reply）</a>：返回append后字符串值（value）的长度。</p>
+        
+        <h2>列子</h2>
+        
+        <div class='example' data-session='600f91d05f8801454bfd012c39cdd227'>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>EXISTS mykey</span>
+          <pre>(integer) 0</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>APPEND mykey &quot;Hello&quot;</span>
+          <pre>(integer) 5</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>APPEND mykey &quot; World&quot;</span>
+          <pre>(integer) 11</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>GET mykey</span>
+          <pre>"Hello World"</pre><form>
+            <span class='monospace prompt'>redis&gt;&nbsp;</span>
+            <input autocomplete='off' name='command' spellcheck='false' type='text' />
+          </form></div>
+        
+        
+        <h2>Pattern: Time series</h2>
+        
+        <p>The <a href="/commands/append.html">APPEND</a> command can be used to create a very compact representation of a
+        list of fixed-size samples, usually referred as <em>time series</em>.
+        Every time a new sample arrives we can store it using the command</p>
+        
+        <pre><code>APPEND timeseries &quot;fixed-size sample&quot;&#x000A;</code></pre>
+        
+        <p>Accessing individual elements in the time series is not hard:</p>
+        
+        <ul>
+        <li><a href="/commands/strlen.html">STRLEN</a> can be used in order to obtain the number of samples.</li>
+        <li><a href="/commands/getrange.html">GETRANGE</a> allows for random access of elements.
+        If our time series have associated time information we can easily implement
+        a binary search to get range combining <a href="/commands/getrange.html">GETRANGE</a> with the Lua scripting
+        engine available in Redis 2.6.</li>
+        <li><a href="/commands/setrange.html">SETRANGE</a> can be used to overwrite an existing time series.</li>
+        </ul>
+        
+        <p>The limitation of this pattern is that we are forced into an append-only mode
+        of operation, there is no way to cut the time series to a given size easily
+        because Redis currently lacks a command able to trim string objects.
+        However the space efficiency of time series stored in this way is remarkable.</p>
+        
+        <p>Hint: it is possible to switch to a different key based on the current Unix
+        time, in this way it is possible to have just a relatively small amount of
+        samples per key, to avoid dealing with very big keys, and to make this pattern
+        more friendly to be distributed across many Redis instances.</p>
+        
+        <p>An example sampling the temperature of a sensor using fixed-size strings (using
+        a binary format is better in real implementations).</p>
+        
+        <div class='example' data-session='600f91d05f8801454bfd012c39cdd227'>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>APPEND ts &quot;0043&quot;</span>
+          <pre>(integer) 4</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>APPEND ts &quot;0035&quot;</span>
+          <pre>(integer) 8</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>GETRANGE ts 0 3</span>
+          <pre>"0043"</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>GETRANGE ts 4 7</span>
+          <pre>"0035"</pre><form>
+            <span class='monospace prompt'>redis&gt;&nbsp;</span>
+            <input autocomplete='off' name='command' spellcheck='false' type='text' />
+          </form></div>
+      </article>
+    </div>
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>

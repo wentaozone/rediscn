@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+          <p><strong>时间复杂度：</strong> O(1) 所有当前有效的子命令</p>
+        </div>
+        
+        <p><a href="/commands/object.html">OBJECT</a> 命令可以在内部调试(debugging)给出keys的内部对象，它用于检查或者了解你的keys是否用到了特殊编码
+        的数据类型来存储空间z。
+        当redis作为缓存使用的时候，你的应用也可能用到这些由<a href="/commands/object.html">OBJECT</a>命令提供的信息来决定应用层的key的驱逐策略(eviction policies)
+        </p>
+        
+        <p> <a href="/commands/object.html">OBJECT</a> 支持多个子命令:</p>
+        
+        <ul>
+        <li><code>OBJECT REFCOUNT &lt;key&gt;</code>该命令主要用于调试(debugging)，它能够返回指定key所对应value被引用的次数.</li>
+        <li><code>OBJECT ENCODING &lt;key&gt;</code> 该命令返回指定key对应value所使用的内部表示(representation)(译者注：也可以理解为数据的压缩方式).</li>
+        <li><code>OBJECT IDLETIME &lt;key&gt;</code> 该命令返回指定key对应的value自被存储之后空闲的时间，以秒为单位(没有读写操作的请求) ，这个值返回以10秒为单位的秒级别时间，这一点可能在以后的实现中改善</li>
+        </ul>
+        
+        <p>对象可以用多种方式编码:</p>
+        
+        <ul>
+        <li>字符串可以被编码为 <code>raw</code> (常规字符串) 或者<code>int</code> (用字符串表示64位无符号整数这种编码方式是为了节省空间).</li>
+        <li>列表类型可以被编码为<code>ziplist</code> 或者 <code>linkedlist</code>.
+        <code>ziplist</code> 是为了节省较小的列表空间而设计一种特殊编码方式.</li>
+        <li>集合被编码为 <code>intset</code> 或者 <code>hashtable</code>.
+         <code>intset</code> 是为了存储数字的较小集合而设计的一种特殊编码方式.</li>
+        <li>哈希表可以被编码为 <code>zipmap</code> 或者<code>hashtable</code>.
+        <code>zipmap</code> 是专为了较小的哈希表而设计的一种特殊编码方式</li>
+        <li>有序集合被编码为<code>ziplist</code> 或者 <code>skiplist</code> 格式.
+         <code>ziplist</code>可以表示较小的有序集合,  <code>skiplist</code> 表示任意大小多的有序集合.</li>
+        </ul>
+        
+        <p>一旦你做了一个操作让redis无法再使用那些节省空间的编码方式，它将自动将那些特殊的编码类型转换为普通的编码类型.</p>
+        
+        <h2>Return value</h2>
+        
+        <p>不同的子命令会对应不同的返回值.</p>
+        
+        <ul>
+        <li> <code>refcount</code> 和 <code>idletime</code> 返回整数.</li>
+        <li><code>encoding</code> 返回编码类型.</li>
+        </ul>
+        
+        <p>如果你尝试检查的参数缺失，将会返回为空</p>
+        
+        <h2>Examples</h2>
+        
+        <pre><code>redis&gt; lpush mylist &quot;Hello World&quot;&#x000A;(integer) 4&#x000A;redis&gt; object refcount mylist&#x000A;(integer) 1&#x000A;redis&gt; object encoding mylist&#x000A;&quot;ziplist&quot;&#x000A;redis&gt; object idletime mylist&#x000A;(integer) 10&#x000A;</code></pre>
+        
+        <p>接下来的例子你可以看到redis一旦不能够实用节省空间的编码类型时编码方式的改变.</p>
+        
+        <pre><code>redis&gt; set foo 1000&#x000A;OK&#x000A;redis&gt; object encoding foo&#x000A;&quot;int&quot;&#x000A;redis&gt; append foo bar&#x000A;(integer) 7&#x000A;redis&gt; get foo&#x000A;&quot;1000bar&quot;&#x000A;redis&gt; object encoding foo&#x000A;&quot;raw&quot;&#x000A;</code></pre>
+        
+      </article>
+    </div>
+    <script type='text/javascript'>startShow();</script>
+
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+      </body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+          <p><strong>时间复杂度：</strong> O(log(N)+M) N是有序集合中元素个数，M是返回的结果集中元素如果M是常量（比如，用LIMIT总是请求前10个元素），你可以认为是O(log(N))。</p>
+        </div>
+        
+        <p>
+		返回<code>key</code>的有序集合中的分数在<code>max</code>和<code>min</code>之间的所有元素（包括分数等于<code>max</code>或者<code>min</code>的元素）。与有序集合的默认排序相反，对于这个命令，元素被认为是从高分到低具有相同分数的元素按字典反序。</p>
+        
+        <p>除了反序之外， ng, <a href="/commands/zrevrangebyscore.html">ZREVRANGEBYSCORE</a> 和<a href="/commands/zrangebyscore.html">ZRANGEBYSCORE</a>类似。</p>
+        
+        
+        
+        <h2>返回值</h2>
+        <p><a href="/topics/protocol.html#multi-bulk-reply">Multi-bulk reply</a>: 指定分数范围的元素列表(也可以返回他们的分数)。</p>
+      
+        <h2>列子</h2>
+        <div class='example' data-session='a9bb0fe66664bce60b36ea7e16966188'>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZADD myzset 1 "one"</span>
+          <pre>(integer) 1</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZADD myzset 2 "two"</span>
+          <pre>(integer) 1</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZADD myzset 3 "three"</span>
+          <pre>(integer) 1</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZREVRANGEBYSCORE myzset +inf -inf</span>
+          <pre>1) "three"&#x000A;2) "two"&#x000A;3) "one"</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZREVRANGEBYSCORE myzset 2 1</span>
+          <pre>1) "two"&#x000A;2) "one"</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZREVRANGEBYSCORE myzset 2 (1</span>
+          <pre>1) "two"</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZREVRANGEBYSCORE myzset (2 (1</span>
+          <pre>(empty list or set)</pre><form>
+            <span class='monospace prompt'>redis>&nbsp;</span>
+            <input autocomplete='off' name='command' spellcheck='false' type='text' />
+          </form></div>
+        
+      </article>
+    </div>
+    
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>

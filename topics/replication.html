@@ -1,0 +1,89 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>Replication -- Redis</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+	<div class='text'>
+      <article id='topic'>
+        <h1>Replication</h1>
+        
+        <p>Redis复制很简单易用，它通过配置允许slave Redis Servers或者Master Servers的复制品。接下来有几个关于redis复制的非常重要特性：</p>
+        
+        <ul>
+        <li><p>一个Master可以有多个Slaves。</p></li>
+        <li><p>Slaves能过接口其他slave的链接，除了可以接受同一个master下面slaves的链接以外，还可以接受同一个结构图中的其他slaves的链接。</p></li>
+        <li><p>redis复制是在master段是非阻塞的，这就意味着master在同一个或多个slave端执行同步的时候还可以接受查询。</p></li>
+        <li><p>复制在slave端也是非阻塞的，假设你在redis.conf中配置redis这个功能，当slave在执行的新的同步时，它仍可以用旧的数据信息来提供查询，否则，你可以配置当redis slaves去master失去联系是，slave会给发送一个客户端错误。</p></li>
+        <li><p>为了有多个slaves可以做只读查询，复制可以重复2次，甚至多次，具有可扩展性（例如：slaves对话与重复的排序操作，有多份数据冗余就相对简单了）。</p></li>
+        <li><p>他可以利用复制去避免在master端保存数据，只要对master端redis.conf进行配置，就可以避免保存（所有的保存操作），然后通过slave的链接，来实时的保存在slave端。</p></li>
+        </ul>
+        
+        
+        <h2>redis复制是怎么进行工作</h2>
+        
+        <p>如果设置了一个slave，不管是在第一次链接还是重新链接master的时候，slave会发送一个同步命令</p>
+        
+        <p>然后master开始后台保存，收集所有对修改数据的命令。当后台保存完成，master会将这个数据文件传送到slave，然后保存在磁盘，加载到内存中；master接着发送收集到的所有的修改数据的命令，这好比一个流命令，是redis协议本身来实现的。</p>
+        
+        <p>你可以自己通过远程登录来进行尝试，当服务器在做一些工作并发送同步命令的时候链接到redis端口，你将会看到大量的数据传输，然后收到的每个命令会会显示在远程登录的会话中。</p>
+        
+        <p>当master和slave因一些故障当机时，slaves会自动的重链，如果master收到多个slave的同步请求，master会执行一个后台保存，以确保所有的slaves都是正常的。</p>
+        
+        <p>当master和slave能够维持链接，就会有一个完整的同步进行。</p>
+        
+        <h2>配置</h2>
+        
+        <p>配置复制是很简单的，仅仅在slave的配置文件中增加类似下面这行的内容:</p>
+        
+        <pre><code>slaveof 192.168.1.1 6379&#x000A;</code></pre>
+        
+        <p>你可以更换master的ip地址或地址，或者，你可以使用slaveof命令，master就会启动和slave的同步。</p>
+        
+        <h2>设置slave到master的认证</h2>
+        
+        <p>如果master需要通过密码登陆，那就需要配置slave在进行所有同步操作也要使用到密码。</p>
+        
+        <p>在一个运行的实例上尝试，使用 <code>redis-cli</code> :</p>
+        
+        <pre><code>config set masterauth &lt;password&gt;&#x000A;</code></pre>
+        
+        <p>To set it permanently, add this to your config file:</p>
+        
+        <pre><code>masterauth &lt;password&gt;&#x000A;</code></pre>
+      </article>
+    </div>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+    <script src='/js/foot.js'></script>
+  </body>
+</html>

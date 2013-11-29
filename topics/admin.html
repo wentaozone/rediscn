@@ -1,0 +1,65 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>Redis中文资料站</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <article id='topic'>
+        <h1>Redis 的管理</h1>
+        
+        <p>此篇包含关于管理 Redis 实例的话题。每个话题均包含在一个常见问题表单中。将来会有新的话题加入。</p>
+        
+        <h2>无需停机升级或重启 Redis 实例。</h2>
+        
+        <p>Redis 被设计成服务器上的长时间运行进程。针对运行实例，有许多配置选项可以通过 <a href="/commands/config-set.html">CONFIG SET</a> 命令进行修改，而无需执行任何形式的重启。 </p>
+        
+        <p>从 Redis 2.2 开始，可以从 AOF 切换到 RDB 的快照持久性或其他方式而不需要重启 Redis。检索 'CONFIG GET *' 命令获取更多信息。</p>
+        
+        <p>但偶尔重新启动是必须的，如为升级 Redis 程序到新的版本，或者当你需要修改某些目前 CONFIG 命令还不支持的配置参数的时候。</p>
+        
+        <p>下列步骤通常用来避免任何形式的停机。</p>
+        
+        <ul>
+        <li>为你的 Redis 实例配置新的从实例。为此你需要一台额外的服务器，或者你的服务器有足够的内存以便同时运行两个 Redis 实例。</li>
+        <li>如果你用单一的服务器，需确保从实例用与主实例不同的端口启动，否则从实例根本不会启动成功。</li>
+        <li>等待复制机制的初始同步完成（检查从实例的日志文件）。</li>
+        <li>用 INFO 命令确认在主从实例中有同样数量的键值。用 redis-cli 检查从实例工作正常并响应你的命令。</li>
+        <li>配置你所有的客户端以便使用新的实例（即从实例）</li>
+        <li>当你确认主实例不再接收到任何请求（你可以用 <a href="/commands/monitor.html">MONITOR</a> 命令监视到），使用 <strong>SLAVEOF NO ONE</strong> 命令切换从实例为主实例，然后关闭原先的主实例。</li>
+        </ul>
+      </article>
+    </div>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+    <script src='/js/foot.js'></script>
+  </body>
+</html>

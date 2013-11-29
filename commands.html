@@ -1,0 +1,192 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>Redis命令（commands）  -- redis中文资料站</title>
+	<meta http-equiv="description" content="redis 命令（commands）列表，列出Redis的全部功能命令集合，介绍各个命令的参数和用法。" />
+	
+  </head>
+  <body class=''>   
+    <script src='/js/head.js'></script>
+    <section id='commands'>
+      <nav>
+        <a href='#'>全部（All）</a>
+        <a href='#generic'>关键字（Keys）</a>
+        <a href='#string'>字符串（String）</a>
+        <a href='#hash'>哈希（Hashs）</a>
+        <a href='#list'>列表（Lists）</a>
+        <a href='#set'>集合（Sets）</a>
+        <a href='#sorted_set'>有序集合（Sorted Sets）</a><br/>
+        <a href='#pubsub'>发布/订阅（Pub/Sub）</a>
+        <a href='#transactions'>事务（Transactions）</a>
+        <a href='#scripting'>脚本（Scripting）</a>
+        <a href='#connection'>连接（Connection）</a>
+        <a href='#server'>服务（Server）</a>
+      </nav>
+      <script type='text/javascript'>
+			document.write('<ul>');
+			showCommandsHtmlItem('append');
+			showCommandsHtmlItem('auth');
+			showCommandsHtmlItem('bgrewriteaof');
+			showCommandsHtmlItem('bgsave');
+			showCommandsHtmlItem('bitcount');
+			showCommandsHtmlItem('bitop');
+			showCommandsHtmlItem('blpop');
+			showCommandsHtmlItem('brpop');
+			showCommandsHtmlItem('brpoplpush');
+			showCommandsHtmlItem('client-kill');
+			showCommandsHtmlItem('client-list');
+			showCommandsHtmlItem('client-getname');
+			showCommandsHtmlItem('client-setname');
+			showCommandsHtmlItem('config-get');
+			showCommandsHtmlItem('config-set');
+			showCommandsHtmlItem('config-resetstat');
+			showCommandsHtmlItem('dbsize');
+			showCommandsHtmlItem('debug-object');
+			showCommandsHtmlItem('debug-segfault');
+			showCommandsHtmlItem('decr');
+			showCommandsHtmlItem('decrby');
+			showCommandsHtmlItem('del');
+			showCommandsHtmlItem('discard');
+			showCommandsHtmlItem('dump');
+			showCommandsHtmlItem('echo');
+			showCommandsHtmlItem('eval');
+			showCommandsHtmlItem('evalsha');
+			showCommandsHtmlItem('exec');
+			showCommandsHtmlItem('exists');
+			showCommandsHtmlItem('expire');
+			showCommandsHtmlItem('expireat');
+			showCommandsHtmlItem('flushall');
+			showCommandsHtmlItem('flushdb');
+			showCommandsHtmlItem('get');
+			showCommandsHtmlItem('getbit');
+			showCommandsHtmlItem('getrange');
+			showCommandsHtmlItem('getset');
+			showCommandsHtmlItem('hdel');
+			showCommandsHtmlItem('hexists');
+			showCommandsHtmlItem('hget');
+			showCommandsHtmlItem('hgetall');
+			showCommandsHtmlItem('hincrby');
+			showCommandsHtmlItem('hincrbyfloat');
+			showCommandsHtmlItem('hkeys');
+			showCommandsHtmlItem('hlen');
+			showCommandsHtmlItem('hmget');
+			showCommandsHtmlItem('hmset');
+			showCommandsHtmlItem('hset');
+			showCommandsHtmlItem('hsetnx');
+			showCommandsHtmlItem('hvals');
+			showCommandsHtmlItem('incr');
+			showCommandsHtmlItem('incrby');
+			showCommandsHtmlItem('incrbyfloat');
+			showCommandsHtmlItem('info');
+			showCommandsHtmlItem('keys');
+			showCommandsHtmlItem('lastsave');
+			showCommandsHtmlItem('lindex');
+			showCommandsHtmlItem('linsert');
+			showCommandsHtmlItem('llen');
+			showCommandsHtmlItem('lpop');
+			showCommandsHtmlItem('lpush');
+			showCommandsHtmlItem('lpushx');
+			showCommandsHtmlItem('lrange');
+			showCommandsHtmlItem('lrem');
+			showCommandsHtmlItem('lset');
+			showCommandsHtmlItem('ltrim');
+			showCommandsHtmlItem('mget');
+			showCommandsHtmlItem('migrate');
+			showCommandsHtmlItem('monitor');
+			showCommandsHtmlItem('move');
+			showCommandsHtmlItem('mset');
+			showCommandsHtmlItem('msetnx');
+			showCommandsHtmlItem('multi');
+			showCommandsHtmlItem('object');
+			showCommandsHtmlItem('persist');
+			showCommandsHtmlItem('pexpire');
+			showCommandsHtmlItem('pexpireat');
+			showCommandsHtmlItem('ping');
+			showCommandsHtmlItem('psetex');
+			showCommandsHtmlItem('psubscribe');
+			showCommandsHtmlItem('pttl');
+			showCommandsHtmlItem('publish');
+			showCommandsHtmlItem('punsubscribe');
+			showCommandsHtmlItem('quit');
+			showCommandsHtmlItem('randomkey');
+			showCommandsHtmlItem('rename');
+			showCommandsHtmlItem('renamenx');
+			showCommandsHtmlItem('restore');
+			showCommandsHtmlItem('rpop');
+			showCommandsHtmlItem('rpoplpush');
+			showCommandsHtmlItem('rpush');
+			showCommandsHtmlItem('rpushx');
+			showCommandsHtmlItem('sadd');
+			showCommandsHtmlItem('save');
+			showCommandsHtmlItem('scard');
+			showCommandsHtmlItem('script-exists');
+			showCommandsHtmlItem('script-flush');
+			showCommandsHtmlItem('script-kill');
+			showCommandsHtmlItem('script-load');
+			showCommandsHtmlItem('sdiff');
+			showCommandsHtmlItem('sdiffstore');
+			showCommandsHtmlItem('select');
+			showCommandsHtmlItem('set');
+			showCommandsHtmlItem('setbit');
+			showCommandsHtmlItem('setex');
+			showCommandsHtmlItem('setnx');
+			showCommandsHtmlItem('setrange');
+			showCommandsHtmlItem('shutdown');
+			showCommandsHtmlItem('sinter');
+			showCommandsHtmlItem('sinterstore');
+			showCommandsHtmlItem('sismember');
+			showCommandsHtmlItem('slaveof');
+			showCommandsHtmlItem('slowlog');
+			showCommandsHtmlItem('smembers');
+			showCommandsHtmlItem('smove');
+			showCommandsHtmlItem('sort');
+			showCommandsHtmlItem('spop');
+			showCommandsHtmlItem('srandmember');
+			showCommandsHtmlItem('srem');
+			showCommandsHtmlItem('strlen');
+			showCommandsHtmlItem('subscribe');
+			showCommandsHtmlItem('sunion');
+			showCommandsHtmlItem('sunionstore');
+			showCommandsHtmlItem('sync');
+			showCommandsHtmlItem('time');
+			showCommandsHtmlItem('ttl');
+			showCommandsHtmlItem('type');
+			showCommandsHtmlItem('unsubscribe');
+			showCommandsHtmlItem('unwatch');
+			showCommandsHtmlItem('watch');
+			showCommandsHtmlItem('zadd');
+			showCommandsHtmlItem('zcard');
+			showCommandsHtmlItem('zcount');
+			showCommandsHtmlItem('zincrby');
+			showCommandsHtmlItem('zinterstore');
+			showCommandsHtmlItem('zrange');
+			showCommandsHtmlItem('zrangebyscore');
+			showCommandsHtmlItem('zrank');
+			showCommandsHtmlItem('zrem');
+			showCommandsHtmlItem('zremrangebyrank');
+			showCommandsHtmlItem('zremrangebyscore');
+			showCommandsHtmlItem('zrevrange');
+			showCommandsHtmlItem('zrevrangebyscore');
+			showCommandsHtmlItem('zrevrank');
+			showCommandsHtmlItem('zscore');
+			showCommandsHtmlItem('zunionstore');
+			document.write('</ul>');		
+        </script>      	
+    </section>
+    <div class='text' style="width:100%; max-width:93%;word-wrap:break-word;">
+      <section >
+redis所有已知命令：<br/>    append,auth,bgrewriteaof,bgsave,bitcount,bitop,blpop,brpop,brpoplpush,client-kill,client-list,client-getname,client-setname,config-get,config-set,config-resetstat,dbsize,debug-object,debug-segfault,decr,decrby,del,discard,dump,echo,eval,evalsha,exec,exists,expire,expireat,flushall,flushdb,get,getbit,getrange,getset,hdel,hexists,hget,hgetall,hincrby,hincrbyfloat,hkeys,hlen,hmget,hmset,hset,hsetnx,hvals,incr,incrby,incrbyfloat,info,keys,lastsave,lindex,linsert,llen,lpop,lpush,lpushx,lrange,lrem,lset,ltrim,mget,migrate,monitor,move,mset,msetnx,multi,object,persist,pexpire,pexpireat,ping,psetex,psubscribe,pttl,publish,punsubscribe,quit,randomkey,rename,renamenx,restore,rpop,rpoplpush,rpush,rpushx,sadd,save,scard,script-exists,script-flush,script-kill,script-load,sdiff,sdiffstore,select,set,setbit,setex,setnx,setrange,shutdown,sinter,sinterstore,sismember,slaveof,slowlog,smembers,smove,sort,spop,srandmember,srem,strlen,subscribe,sunion,sunionstore,sync,time,ttl,type,unsubscribe,unwatch,watch,zadd,zcard,zcount,zincrby,zinterstore,zrange,zrangebyscore,zrank,zrem,zremrangebyrank,zremrangebyscore,zrevrange,zrevrangebyscore,zrevrank,zscore,zunionstore
+</section>
+      
+    </div>
+    <script src='/js/foot.js'></script>
+  </body>
+</html>

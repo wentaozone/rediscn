@@ -1,0 +1,102 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>社区 -- Redis中文资料站</title>
+	<meta http-equiv="description" content="redis中文资料站，redis社区期待您的加入，奉献一份您的力量。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <article id='topic'>
+        <h1>社区</h1>
+        
+        <ul>
+        <li>加入 <a href="http://groups.google.com/group/redis-db">邮件列表</a></li>
+        <li>让我们相聚在Freenode <code>#redis</code>频道 (<a href="http://webchat.freenode.net/?channels=redis">web access link</a>)</li>
+        <li>收听<a href="http://twitter.com/antirez">Salvatore Twitter</a></li>
+        </ul>
+        
+        
+        <h2>Local meetups</h2>
+        
+        <ul>
+        <li><a href="http://www.meetup.com/Redis-London">London Redis Meetup Group</a></li>
+        <li><a href="http://sfmeetup.redis.io">San Francisco Meetup Group</a></li>
+        </ul>
+        
+        
+        <h2>Contributing to Redis</h2>
+        
+        <p>想为redis贡献一份力量么？</p>
+        
+        <ol>
+        <li><p>进入Freenode #redis聊天频道找到Salvatore和Pieter.问问他们对你的主意有什么看法,有没有机会加入到下一个版本。我们尽可能保证redis简单，所以你很可能会有很大阻力。
+        </p></li>
+        <li><p>如果你没有得到反馈或者是积极的回应，那么把你的提议发到<a href="http://groups.google.com/group/redis-db">mailing list</a>。务必解释你的用例和可能的接口形式。
+        
+        </p></li>
+        <li><p>如果你获得正面回应，按以下步骤提交补丁：</p>
+        
+        <ol>
+        <li>创建<a href="http://github.com/antirez/redis">官方仓库分支</a>。</li>
+        <li>克隆你的分支： <code>git clone git@github.com:&lt;your-username&gt;/redis.git</code></li>
+        <li>确保通过测试 <code>make &amp;&amp; make test</code></li>
+        <li>创建一个主题分支: <code>git checkout -b new-feature</code></li>
+        <li>加入测试和代码。</li>
+        <li>确保做完这些之后依然能通过测试: <code>make &amp;&amp; make test</code></li>
+        <li>提交分支。</li>
+        <li><a href="https://github.com/antirez/redis/issues">创建一个议题</a> 并附上你分支的链接。</li>
+        <li>坐下来尽情享受吧</li>
+        </ol>
+        </li>
+        </ol>
+        
+        
+        <p>还有其他的方式来协助我们：</p>
+        
+        <ul>
+        <li><p><a href="https://github.com/antirez/redis/issues">修复bug或者分享你对相关问题的经验</a></p></li>
+        <li><p>改善<a href="http://github.com/antirez/redis-doc">文档</a></p></li>
+        <li><p>帮助维护或者创建新的 <a href="/clients.html">客户端库</a></p></li>
+        <li><p>Improve <a href="http://github.com/antirez/redis-io">改善这个页面</a></p></li>
+        </ul>
+      </article>
+    </div>
+    
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'community';
+          var disqus_url = 'http://redis.cn/community.html';
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+    
+    <script src='/js/foot.js'></script>
+  </body>
+</html>

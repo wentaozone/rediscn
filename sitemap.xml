@@ -1,0 +1,2199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+       http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+    <loc>http://redis.cn/</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/buzz.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/clients.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/append.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/auth.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/bgrewriteaof.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/bgsave.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/blpop.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/brpop.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/brpoplpush.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/client-kill.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/client-list.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/config-get.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/config-resetstat.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/config-set.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/dbsize.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/debug-object.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/debug-segfault.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/decr.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/decrby.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/del.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/discard.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/echo.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/eval.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/evalsha.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/exec.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/exists.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/expire.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/expireat.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/flushall.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/flushdb.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/get.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/getbit.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/getrange.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/getset.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/hdel.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/hexists.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/hget.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/hgetall.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/hincrby.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/hkeys.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/hlen.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/hmget.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/hmset.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/hset.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/hsetnx.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/hvals.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/incr.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/incrby.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/info.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/keys.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/lindex.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/linsert.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/llen.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/lpop.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/lpush.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/lrange.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/lrem.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/lset.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/ltrim.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/mget.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/monitor.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/move.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/mset.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/msetnx.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/multi.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/object.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/persist.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/ping.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/psubscribe.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/publish.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/punsubscribe.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/quit.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/randomkey.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/rename.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/renamenx.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/rpop.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/rpoplpush.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/rpush.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/rpushx.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/sadd.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/scard.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/script-exists.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/script-flush.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/script-kill.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/script-load.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/sdiff.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/sdiffstore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/select.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/set.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/setbit.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/setex.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/setnx.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/setrange.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/shutdown.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/sinter.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/sinterstore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/sismember.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/slaveof.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/slowlog.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/smembers.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/smove.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/sort.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/spop.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/srandmember.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/srem.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/strlen.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/subscribe.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/sunion.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/sunionstore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/sync.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/ttl.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/type.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/unsubscribe.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/watch.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/zadd.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/zcard.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/zcount.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/zincrby.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/zinterstore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/zrange.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/zrangebyscore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/zrank.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/zrem.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/zremrangebyrank.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/zremrangebyscore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/zrevrange.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/zrevrangebyscore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/zrevrank.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/zscore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/commands/zunionstore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/community.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/csdn.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/documentation.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/download.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/admin.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/benchmarks.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/data-types.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/data-types-intro.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/faq.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/internals.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/internals-eventlib.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/internals-sds.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/internals-vm.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/introduction.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/memory-optimization.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/persistence.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/pipelining.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/protocol.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/pubsub.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/replication.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/transactions.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/twitter-clone.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/virtual-memory.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://redis.cn/topics/whos-using-redis.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+<url>
+    <loc>http://www.redis.cn/commands.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+
+	<url>
+    <loc>http://www.redis.cn/aboutus.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+	
+	<url>
+    <loc>http://www.redis.cn/buzz.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+	
+	<url>
+    <loc>http://www.redis.cn/clients.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+	
+	<url>
+    <loc>http://www.redis.cn/commands.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+	
+	<url>
+    <loc>http://www.redis.cn/commands/append.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+	
+	<url>
+    <loc>http://www.redis.cn/commands/auth.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/bgrewriteaof.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/bgsave.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/blpop.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/brpop.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/brpoplpush.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/client-kill.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/client-list.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/config-get.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/config-resetstat.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/config-set.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/dbsize.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/debug-object.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/debug-segfault.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/decr.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/decrby.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/del.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/discard.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/echo.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/eval.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/evalsha.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/exec.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/exists.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/expire.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/expireat.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/flushall.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/flushdb.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/get.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/getbit.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/getrange.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/getset.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/hdel.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/hexists.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/hget.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/hgetall.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/hincrby.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/hkeys.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/hlen.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/hmget.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/hmset.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/hset.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/hsetnx.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/hvals.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/incr.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/incrby.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/info.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/keys.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/lindex.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/linsert.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/llen.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/lpop.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/lpush.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/lrange.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/lrem.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/lset.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/ltrim.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/mget.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/monitor.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/move.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/mset.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/msetnx.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/multi.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/object.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/persist.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/ping.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/psubscribe.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/publish.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/punsubscribe.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/quit.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/randomkey.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/rename.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/renamenx.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/rpop.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/rpoplpush.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/rpush.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/rpushx.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/sadd.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/scard.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/script-exists.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/script-flush.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/script-kill.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/script-load.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/sdiff.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/sdiffstore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/select.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/set.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/setbit.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/setex.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/setnx.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/setrange.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/shutdown.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/sinter.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/sinterstore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/sismember.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/slaveof.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/slowlog.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/smembers.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/smove.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/sort.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/spop.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/srandmember.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/srem.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/strlen.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/subscribe.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/sunion.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/sunionstore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/sync.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/ttl.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/type.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/unsubscribe.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/watch.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/zadd.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/zcard.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/zcount.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/zincrby.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/zinterstore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/zrange.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/zrangebyscore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/zrank.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/zrem.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/zremrangebyrank.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/zremrangebyscore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/zrevrange.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/zrevrangebyscore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/zrevrank.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/zscore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/commands/zunionstore.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/community.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/csdn.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/documentation.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/download.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/admin.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/benchmarks.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/data-types.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/data-types-intro.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/faq.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/internals.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/internals-eventlib.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/internals-sds.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/internals-vm.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/introduction.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/memory-optimization.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/persistence.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/pipelining.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/protocol.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/pubsub.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/replication.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/transactions.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/twitter-clone.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/virtual-memory.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+		<url>
+    <loc>http://www.redis.cn/topics/whos-using-redis.html</loc>
+    <priority>1.00</priority>
+    <lastmod>2011-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+</url>
+		
+</urlset>

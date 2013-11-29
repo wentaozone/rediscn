@@ -1,0 +1,126 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>REDIS下载 -- Redis中文资料站</title>
+	<meta http-equiv="description" content="redis下载中心，下载各种版本的redis，包括2.6.16稳定版redid,2.8.0-rc2版本以及win32/64版本" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <article id='topic'>
+        <h1>REDIS下载</h1>
+        
+        <p>Redis 使用标准的
+        <strong>major.minor.patchlevel</strong>版本做法。
+        <strong>stable</strong>表示稳定版本，一般用偶数版本，如：1.2, 2.0, 2.2, 2.4, 2.6。
+         奇数标识不稳定版本，如：2.7.x，他未来的稳定版本是2.8。
+         </p>
+        
+        <table class="versions">
+      
+          <tr class="current">
+            <td>2.6.16</td>
+            <td>稳定版</td>
+            <td>这是最新的Redis 2.4版本的替换版本，最新的Redis 2.6版本支持Lua脚本，时间能精确到毫秒，改进了内存使用情况，无限制的客户端连接数量，
+            AOF改进，更好的性能和一些新的命令功能。完整的新功能列表和修订内容请参考 	
+            <a href="https://github.com/antirez/redis/raw/2.6/00-RELEASENOTES" target="_blank">发布日志</a>
+            <br>
+            <td>
+              <a href="http://redis.googlecode.com/files/redis-2.6.16.tar.gz">下载</a>
+            </td>
+          </tr>
+        
+          <tr>
+            <td>2.8.0-rc2</td>
+            <td>候选发布版</td>
+            <td>
+             	Redis 2.8 很快会替换掉2.6版本，它进行了重大改进，例如：Replication partial resynchronization ，IPv6的支持，配置重写，Pub/Sub 机制更新等等。
+             	虽然现在还不能用于线上，但是他是个高质量的beta版本。点击<a href="https://github.com/antirez/redis/raw/2.8/00-RELEASENOTES" target="_blank">发布日志</a> 查看关于该版本的改进和变化。
+            </td>
+            <td>
+              <a href="http://download.redis.io/releases/redis-2.8.0-rc2.tar.gz">下载</a>
+            </td>
+          </tr>
+        
+          <tr>
+            <td>Unstable</td>
+            <td>Unstable</td>
+            <td>这是开发过程中产生的版本，仅供黑客级别学习研究。
+            <td>
+              <a href="https://github.com/antirez/redis/tree/unstable">Clone</a>
+            </td>
+          </tr>
+        
+          <tr>
+            <td>Win32/64</td>
+            <td>Unofficial</td>
+            <td>Redis的项目不直接支持windows，但是微软开源团队开发和维护着一个<a href="https://github.com/MSOpenTech/redis" target="_blank">Win32/64版本的Redis</a>.
+        	  目前他们还不适合线上使用，可以用于开发环境中使用，我们期待和他们的作者合作，但是<a href="http://antirez.com/post/redis-win32-msft-patch.html" target="_blank"s>我们不会把它合并到版本管理里面</a>.
+            <td>
+              <a href="https://github.com/MSOpenTech/redis">Clone</a>
+            </td>
+          </tr>
+        
+        </table>
+        
+        <p>其他下载地址<a href="https://github.com/antirez/redis/downloads">GitHub</a>
+        ， <a href="http://code.google.com/p/redis/downloads/list?can=1">Google Code</a>。</p>
+        
+        <h1>安装</h1>
+        
+        <p>下载，解压和安装：</p>
+        
+        <pre><code>$ wget http://redis.googlecode.com/files/redis-2.6.16.tar.gz&#x000A;$ tar xzf redis-2.6.16.tar.gz&#x000A;$ cd redis-2.6.16&#x000A;$ make&#x000A;</code></pre>
+        
+        <p>编译后的可执行文件在src目录中，可以使用下面的命令运行Redis:</p>
+        
+        <pre><code>$ src/redis-server&#x000A;</code></pre>
+        
+        <p>你可以使用内置的客户端连接Redis:</p>
+        
+        <pre><code>$ src/redis-cli&#x000A;redis&gt; set foo bar&#x000A;OK&#x000A;redis&gt; get foo&#x000A;&quot;bar&quot;&#x000A;</code></pre>
+        
+        <p>你是不是刚刚接触使用Redis?试试我们的<a href="http://try.redis-db.com" target="_blank">在线互动教程</a>吧。</p>
+        
+        <h2>Redis集群在哪里？</h2>
+        
+        <p>Redis Cluster, the distributed version of Redis, is making a lot of progresses and will be released as beta at the start of Q3 2013, and in a stable release before the end of 2013. You can <a href="https://vimeo.com/63672368">watch a video about what Redis Cluster can currently do</a>. The source code of Redis Cluster is publicly available in the <code>unstable</code> branch, check the <code>cluster.c</code> source code.</p>
+      </article>
+    </div>
+    
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'download';
+          var disqus_url = 'http://redis.cn/download.html';
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+    <script src='/js/foot.js'></script>
+  </body>
+</html>

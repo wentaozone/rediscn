@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+          <p><strong>时间复杂度：</strong> O(log(N)+M)，N为有序集的基数，而M为结果集的基数。</p>
+        </div>
+        
+        <p>
+返回有序集key中，指定区间内的成员。其中成员按score值递增(从小到大)来排序。具有相同score值的成员按字典序来排列。</p>
+<p>
+如果你需要成员按score值递减(score相等时按字典序递减)来排列，请使用<a href="/commands/zrevrange.html">ZREVRANGE</a>命令。
+下标参数start和stop都以0为底，也就是说，以0表示有序集第一个成员，以1表示有序集第二个成员，以此类推。
+你也可以使用负数下标，以-1表示最后一个成员，-2表示倒数第二个成员，以此类推。</p><p>
+超出范围的下标并不会引起错误。如果start的值比有序集的最大下标还要大，或是start &gt; stop时，ZRANGE命令只是简单地返回一个空列表。另一方面，假如stop参数的值比有序集的最大下标还要大，那么Redis将stop当作最大下标来处理。
+</p><p>
+可以通过使用WITHSCORES选项，来让成员和它的score值一并返回，返回列表以value1,score1, ..., valueN,scoreN的格式表示，而不是value1,...,valueN。客户端库可能会返回一些更复杂的数据类型，比如数组、元组等。
+</p>
+        
+        
+        <h2>返回值</h2>
+        <p><a href="/topics/protocol.html#multi-bulk-reply">Multi-bulk reply</a>: 指定范围的元素列表(可选是否含有分数)。</p>
+      
+        <h2>列子</h2>
+        <div class='example' data-session='bb3bef54ff5049bde391c7cfdf3f37f6'>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZADD myzset 1 "one"</span>
+          <pre>(integer) 1</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZADD myzset 2 "two"</span>
+          <pre>(integer) 1</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZADD myzset 3 "three"</span>
+          <pre>(integer) 1</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZRANGE myzset 0 -1</span>
+          <pre>1) "one"&#x000A;2) "two"&#x000A;3) "three"</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZRANGE myzset 2 3</span>
+          <pre>1) "three"</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>ZRANGE myzset -2 -1</span>
+          <pre>1) "two"&#x000A;2) "three"</pre><form>
+            <span class='monospace prompt'>redis>&nbsp;</span>
+            <input autocomplete='off' name='command' spellcheck='false' type='text' />
+          </form></div>
+        
+      </article>
+    </div>
+    
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>

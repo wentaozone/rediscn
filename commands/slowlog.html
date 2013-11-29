@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+           
+        </div>
+        
+        <p>此命令是为了读取和复位再分配的慢查询日志。</p>
+        
+        <h2>redis慢日志概述</h2>
+        
+        <p>The Redis Slow Log is a system to log queries that exceeded a specified
+        execution time. The execution time does not include I/O operations
+        like talking with the client, sending the reply and so forth,
+        but just the time needed to actually execute the command (this is the only
+        stage of command execution where the thread is blocked and can not serve
+        other requests in the meantime).</p>
+        
+        <p>You can configure the slow log with two parameters: one tells Redis
+        what is the execution time, in microseconds, to exceed in order for the
+        command to get logged, and the other parameter is the length of the
+        slow log. When a new command is logged and the slow log is already at its
+        maximum length, the oldest one is removed from the queue of logged commands
+        in order to make space.</p>
+        
+        <p>The configuration can be done both editing the redis.conf file or
+        while the server is running using
+        the <a href="/commands/config-get.html">CONFIG GET</a> and <a href="/commands/config-set.html">CONFIG SET</a>
+        commands.</p>
+        
+        <h2>读慢日志</h2>
+        
+        <p>The slow log is accumulated in memory, so no file is written with information
+        about the slow command executions. This makes the slow log remarkably fast
+        at the point that you can enable the logging of all the commands (setting the
+        <em>slowlog-log-slower-than</em> config parameter to zero) with minor performance
+        hit.</p>
+        
+        <p>To read the slow log the <strong>SLOWLOG GET</strong> command is used, that returns every
+        entry in the slow log. It is possible to return only the N most recent entries
+        passing an additional argument to the command (for instance <strong>SLOWLOG GET 10</strong>).</p>
+        
+        <p>Note that you need a recent version of redis-cli in order to read the slow
+        log output, since it uses some features of the protocol that were not
+        formerly implemented in redis-cli (deeply nested multi bulk replies).</p>
+        
+        <h2>输出格式</h2>
+        
+        <pre><code>redis 127.0.0.1:6379&gt; slowlog get 2&#x000A;1) 1) (integer) 14&#x000A;   2) (integer) 1309448221&#x000A;   3) (integer) 15&#x000A;   4) 1) "ping"&#x000A;2) 1) (integer) 13&#x000A;   2) (integer) 1309448128&#x000A;   3) (integer) 30&#x000A;   4) 1) "slowlog"&#x000A;      2) "get"&#x000A;      3) "100"&#x000A;</code></pre>
+        
+        <p>Every entry is composed of four fields:
+        * A unique progressive identifier for every slow log entry.
+        * The unix timestamp at which the logged command was processed.
+        * The amount of time needed for its execution, in microseconds.
+        * The array composing the arguments of the command.</p>
+        
+        <p>The entry's unique ID can be used in order to avoid processing slow log entries
+        multiple times (for instance you may have a script sending you an email
+        alert for every new slow log entry).</p>
+        
+        <p>The ID is never reset in the course of the Redis server execution, only a
+        server restart will reset it.</p>
+        
+        <h2>获取当前慢日志长度</h2>
+        
+        <p>使用<strong>SLOWLOG LEN</strong>就可以获取当前慢日志长度</p>
+        
+        <h2>重置慢日志</h2>
+        
+        <p>你可以使用<strong>SLOWLOG RESET</strong> 命令重置慢日志。一旦执行，将丢失以前的所有慢日志。</p>
+        
+        
+      </article>
+    </div>
+    
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>

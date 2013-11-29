@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+          <p><strong>时间复杂度：</strong> O(N) where N is the number of client connections。</p>
+        </div>
+        
+        <p>The <code>CLIENT LIST</code> command returns information and statistics about the client
+        connections server in a mostly human readable format.</p>
+        
+        <h2>Return value</h2>
+        
+        <p><a href="/topics/protocol.html#bulk-reply">Bulk reply</a>: a unique string, formatted as follows:</p>
+        
+        <ul>
+        <li>  One client connection per line (separated by LF)</li>
+        <li>  Each line is composed of a succession of property=value fields separated
+        by a space character.</li>
+        </ul>
+        
+        <p>Here is the meaning of the fields:</p>
+        
+        <ul>
+        <li>  addr: address/port of the client</li>
+        <li>  fd: file descriptor corresponding to the socket</li>
+        <li>  age: total duration of the connection in seconds</li>
+        <li>  idle: idle time of the connection in seconds</li>
+        <li>  flags: client flags (see below)</li>
+        <li>  db: current database ID</li>
+        <li>  sub: number of channel subscriptions</li>
+        <li>  psub: number of pattern matching subscriptions</li>
+        <li>  multi: number of commands in a MULTI/EXEC context</li>
+        <li>  qbuf: query buffer length (0 means no query pending)</li>
+        <li>  qbuf-free: free space of the query buffer (0 means the buffer is full)</li>
+        <li>  obl: output buffer length</li>
+        <li>  oll: output list length (replies are queued in this list when the buffer is full)</li>
+        <li>  omem: output buffer memory usage</li>
+        <li>  events: file descriptor events (see below)</li>
+        <li>  cmd: last command played</li>
+        </ul>
+        
+        <p>The client flags can be a combination of:</p>
+        
+        <pre><code>O: the client is a slave in MONITOR mode&#x000A;S: the client is a normal slave server&#x000A;M: the client is a master&#x000A;x: the client is in a MULTI/EXEC context&#x000A;b: the client is waiting in a blocking operation&#x000A;i: the client is waiting for a VM I/O (deprecated)&#x000A;d: a watched keys has been modified - EXEC will fail&#x000A;c: connection to be closed after writing entire reply&#x000A;u: the client is unblocked&#x000A;A: connection to be closed ASAP&#x000A;N: no specific flag set&#x000A;</code></pre>
+        
+        <p>The file descriptor events can be:</p>
+        
+        <pre><code>r: the client socket is readable (event loop)&#x000A;w: the client socket is writable (event loop)&#x000A;</code></pre>
+        
+        <h2>Notes</h2>
+        
+        <p>New fields are regularly added for debugging purpose. Some could be removed
+        in the future. A version safe Redis client using this command should parse
+        the output accordingly (i.e. handling gracefully missing fields, skipping
+        unknown fields).</p>
+        
+      </article>
+    </div>
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();  // = 'http://redis.cn/commands/'+curCommandObj.key;
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+  </body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+          <p><strong>时间复杂度：</strong> O(1)。</p>
+        </div>
+        
+        <p><a href="/commands/blpop.html">BLPOP</a> 是阻塞式列表的弹出原语。
+        它是命令 <a href="/commands/lpop.html">LPOP</a> 的阻塞版本，这是因为当给定列表内没有任何元素可供弹出的时候，
+		连接将被 <a href="/commands/blpop.html">BLPOP</a> 命令阻塞。 
+		当给定多个 key 参数时，按参数 key 的先后顺序依次检查各个列表，弹出第一个非空列表的头元素。</p>
+        
+        <h2>非阻塞行为</h2>
+        
+		<p>当 <a href="/commands/blpop.html">BLPOP</a> 被调用时，如果给定 <code>key</code> 内至少有一个非空列表，那么弹出遇到的第一个非空列表的头元素，并和被弹出元素所属的列表的名字 <code>key</code> 一起，组成结果返回给调用者。</p>
+        
+        <p>当存在多个给定 <code>key</code> 时， <code>BLPOP</code> 按给定 <code>key</code> 参数排列的先后顺序，依次检查各个列表。
+		我们假设 key <code>list1</code> 不存在，而 <code>list2</code> 和 <code>list3</code> 都是非空列表。考虑以下的命令：</p>
+        
+        <pre><code>BLPOP list1 list2 list3 0&#x000A;</code></pre>
+        
+		<p><a href="/commands/blpop.html">BLPOP</a> 保证返回一个存在于 <code>list2</code> 里的元素（因为它是从 <code>list1</code> --> 
+		<code>list2</code> --> <code>list3</code> 这个顺序查起的第一个非空列表）。</p>
+        
+        <h2>阻塞行为</h2>
+        
+		<p>如果所有给定 key 都不存在或包含空列表，那么 <a href="/commands/blpop.html">BLPOP</a> 命令将阻塞连接，
+		直到有另一个客户端对给定的这些 key 的任意一个执行 <a href="/commands/lpush.html">LPUSH</a> 或 <a href="/commands/rpush.html">RPUSH</a> 命令为止。</p>
+        
+		<p>一旦有新的数据出现在其中一个列表里，那么这个命令会解除阻塞状态，并且返回 <code>key</code> 和弹出的元素值。</p>
+        
+		<p>当 <a href="/commands/blpop.html">BLPOP</a> 命令引起客户端阻塞并且设置了一个非零的超时参数 timeout 的时候，
+		若经过了指定的 timeout 仍没有出现一个针对某一特定 key 的 push 操作，则客户端会解除阻塞状态并且返回一个 <code>nil</code> 的多组合值(multi-bulk value)。</p>
+        
+		<p><strong>timeout 参数表示的是一个指定阻塞的最大秒数的整型值。</strong>当 timeout 为 0 是表示阻塞时间无限制。</p>
+        
+		<h2>什么 key 会先被处理？是什么客户端？什么元素？优先顺序细节。</h2>
+        
+        <ul>
+		<li>当客户端为多个 key 尝试阻塞的时候，若至少存在一个 key 拥有元素，那么返回的键值对(key/element pair)就是从左到右数第一个拥有一个或多个元素的key。
+		在这种情况下客户端不会被阻塞。比如对于这个例子 <code>BLPOP key1 key2 key3 key4 0</code>，假设 <code>key2</code> 和 <code>key4</code> 都非空，
+		那么就会返回 <code>key2</code> 里的一个元素。</li>
+		<li>当多个客户端为同一个 key 阻塞的时候，第一个被处理的客户端是等待最长时间的那个（即第一个因为该key而阻塞的客户端）。
+		一旦一个客户端解除阻塞那么它就不会保持任何优先级，当它因为下一个 <a href="/commands/blpop.html">BLPOP</a> 命令而再次被阻塞的时候，会在处理完那些
+        被同个 key 阻塞的客户端后才处理它（即从第一个被阻塞的处理到最后一个被阻塞的）。</li>
+		<li>当一个客户端同时被多个 key 阻塞时，若多个 key 的元素同时可用（可能是因为事务或者某个Lua脚本向多个list添加元素），
+		那么客户端会解除阻塞，并使用第一个接收到 push 操作的 key（假设它拥有足够的元素为我们的客户端服务，因为有可能存在其他客户端同样是被这个key阻塞着）。
+		从根本上来说，在执行完每个命令之后，Redis 会把一个所有 key 都获得数据<strong>并且</strong>至少使一个客户端阻塞了的 list 运行一次。
+		这个 list 按照新数据的接收时间进行整理，即是从第一个接收数据的 key 到最后一个。在处理每个 key 的时候，只要这个 key 里有元素，
+		Redis就会对所有等待这个key的客户端按照“先进先出”(FIFO)的顺序进行服务。若这个 key 是空的，或者没有客户端在等待这个 key，
+		那么将会去处理下一个从之前的命令或事务或脚本中获得新数据的 key，如此等等。</li>
+        </ul>
+        
+		<h2>当多个元素被 push 进入一个 list 时 <code>BLPOP</code> 的行为</h2>
+        
+		<p>有时候一个 list 会在同一概念的命令的情况下接收到多个元素：</p>
+        
+        <ul>
+		<li>像 <code>LPUSH mylist a b c</code> 这样的可变 push 操作。</li>
+		<li>在对一个向同一个 list 进行多次 push 操作的 <a href="/commands/multi.html">MULTI</a> 块执行完 <a href="/commands/exec.html">EXEC</a> 语句后。</li>
+		<li>使用 Redis 2.6 或者更新的版本执行一个 Lua 脚本。</li>
+        </ul>
+        
+        <p>当多个元素被 push 进入一个被客户端阻塞着的 list 的时候，Redis 2.4 和 Redis 2.6 或者更新的版本所采取行为是不一样的。</p>
+        
+        <p>对于 Redis 2.6 来说，所采取的行为是先执行多个 push 命令，然后在执行了这个命令<em>之后</em>再去服务被阻塞的客户端。看看下面命令顺序。</p>
+        
+        <pre><code>Client A:   BLPOP foo 0&#x000A;Client B:   LPUSH foo a b c&#x000A;</code></pre>
+        
+        <p>如果上面的情况是发生在 Redis 2.6 或更高版本的服务器上，客户端 <strong>A</strong> 会接收到 <code>c</code> 元素，因为在 <a href="/commands/lpush.html">LPUSH</a> 命令执行后，list 包含了 <code>c,b,a</code> 这三个元素，所以从左边取一个元素就会返回 <code>c</code>。</p>
+        
+        <p>相反，Redis 2.4 是以不同的方式工作的：客户端会在 push 操作的<em>上下文中</em>被服务，所以当 <code>LPUSH foo a b c</code> 开始往 list 中 push 第一个元素，它就被传送给客户端<strong>A</strong>，也就是客户端<strong>A</strong>会接收到 <code>a</code>（第一个被 push 的元素）。</p>
+        
+        <p>Redis 2.4的这种行为会在复制或者持续把数据存入AOF文件的时候引发很多问题，所以为了防止这些问题，很多更一般性的、并且在语义上更简单的行为被引入到 Redis 2.6 中。</p>
+        
+        <p>需要注意的是，一个Lua脚本或者一个 <code>MULTI/EXEC</code> 块可能会 push 一堆元素进入一个 list 后，再 <strong>删除这个 list</strong>。
+        在这种情况下，被阻塞的客户端完全不会被服务，并且只要在执行某个单一命令、事务或者脚本后 list 中没有出现元素，它就会被继续阻塞下去。</p>
+        
+        <h2>在一个 <code>MULTI</code> / <code>EXEC</code> 事务中的 <code>BLPOP</code></h2>
+        
+        <p><a href="/commands/blpop.html">BLPOP</a> 可以用于流水线（pipeline，发送多个命令并且批量读取回复），特别是当它是流水线里的最后一个命令的时候，这种设定更加有意义。</p>
+
+        <p>在一个 <a href="/commands/multi.html">MULTI</a> / <a href="/commands/exec.html">EXEC</a> 块里面使用 <a href="/commands/blpop.html">BLPOP</a> 并没有很大意义，因为它要求整个服务器被阻塞以保证块执行时的原子性，这就阻止了其他客户端执行一个 push 操作。
+        因此，一个在 <a href="/commands/multi.html">MULTI</a> / <a href="/commands/exec.html">EXEC</a> 里面的 <a href="/commands/blpop.html">BLPOP</a> 命令会在 list 为空的时候返回一个 <code>nil</code> 值，这跟超时(timeout)的时候发生的一样。</p>
+        
+        <p>如果你喜欢科幻小说，那么想象一下时间是以无限的速度在 <a href="/commands/multi.html">MULTI</a> / <a href="/commands/exec.html">EXEC</a> 块中流逝......</p>
+        
+        <h2>返回值</h2>
+        
+        <p><a href="/topics/protocol.html#multi-bulk-reply">多批量回复</a>: 具体来说:</p>
+        
+        <ul>
+        <li>当没有元素的时候会弹出一个 <code>nil</code> 的多批量值，并且 timeout 过期。</li>
+        <li>当有元素弹出时会返回一个双元素的多批量值，其中第一个元素是弹出元素的 key，第二个元素是 value。</li>
+        </ul>
+        
+        <h2>例子</h2>
+        
+        <pre><code>redis&gt; DEL list1 list2&#x000A;(integer) 0&#x000A;redis&gt; RPUSH list1 a b c&#x000A;(integer) 3&#x000A;redis&gt; BLPOP list1 list2 0&#x000A;1) &quot;list1&quot;&#x000A;2) &quot;a&quot;&#x000A;</code></pre>
+        
+        <h2>可靠的队列</h2>
+        
+        <p>当 <a href="/commands/blpop.html">BLPOP</a> 返回一个元素给客户端的时候，它也从 list 中把该元素移除。这意味着该元素就只存在于客户端的上下文中：如果客户端在处理这个返回元素的过程崩溃了，那么这个元素就永远丢失了。</p>
+        
+        <p>在一些我们希望是更可靠的消息传递系统中的应用上，这可能会导致一些问题。在这种时候，请查看 <a href="/commands/brpoplpush.html">BRPOPLPUSH</a> 命令，这是 <a href="/commands/blpop.html">BLPOP</a> 的一个变形，它会在把返回元素传给客户端之前先把该元素加入到一个目标 list 中。</p>
+        
+        <h2>模式：事件提醒</h2>
+        
+        <p>用来阻塞 list 的操作有可能是不同的阻塞原语。
+        比如在某些应用里，你也许会为了等待新元素进入 Redis Set 而阻塞队列，直到有个新元素加入到 Set 中，这样就可以在不轮询的情况下获得元素。
+        这就要求要有一个 <a href="/commands/spop.html">SPOP</a> 的阻塞版本，而这事实上并不可用。但是我们可以通过阻塞 list 操作轻易完成这个任务。</p>
+        
+        <p>消费者会做的：</p>
+        
+        <pre><code>LOOP forever&#x000A;    WHILE SPOP(key) returns elements&#x000A;        ... process elements ...&#x000A;    END&#x000A;    BRPOP helper_key&#x000A;END&#x000A;</code></pre>
+        
+        <p>而在生产者这角度我们可以这样简单地使用：</p>
+        
+        <pre><code>MULTI&#x000A;SADD key element&#x000A;LPUSH helper_key x&#x000A;EXEC&#x000A;</code></pre>
+        
+      </article>
+    </div>
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();  // = 'http://redis.cn/commands/'+curCommandObj.key + ".html";
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>

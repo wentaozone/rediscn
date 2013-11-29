@@ -1,0 +1,250 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>Redis中文资料站</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <article id='topic'>
+        <h1>A case study: Design and implementation of a simple Twitter clone using only the Redis key-value store as database and PHP</h1>
+        
+        <p>In this article I'll explain the design and the implementation of a <a href="http://retwis.antirez.com">simple clone of Twitter</a> written using PHP and Redis as only database. The programming community uses to look at key-value stores like special databases that can't be used as drop in replacement for a relational database for the development of web applications. This article will try to prove the contrary.</p>
+        
+        <p>Our Twitter clone, <a href="http://retwis.antirez.com">called Retwis</a>, is structurally simple, has very good performance, and can be distributed among N web servers and M Redis servers with very little effort. You can find the source code <a href="http://code.google.com/p/redis/downloads/list">here</a>.</p>
+        
+        <p>We use PHP for the example since it can be read by everybody. The same (or... much better) results can be obtained using Ruby, Python, Erlang, and so on.</p>
+        
+        <p><strong>Note:</strong> <a href="http://retwisrb.danlucraft.com/">Retwis-RB</a> is a port of Retwis to
+        Ruby and Sinatra written by Daniel Lucraft! With full source code included of
+        course, the Git repository is linked in the footer of the web page. The rest
+        of this article targets PHP, but Ruby programmers can also check the other
+        source code, it conceptually very similar.</p>
+        
+        <p><strong>Note:</strong> <a href="http://retwisj.cloudfoundry.com/">Retwis-J</a> is a port of Retwis to
+        Java, using the Spring Data Framework, written by Costin Leau. The source code
+        can be found on
+        <a href="https://github.com/SpringSource/spring-data-keyvalue-examples">GitHub</a> and
+        there is comprehensive documentation available at
+        <a href="http://j.mp/eo6z6I">springsource.org</a>.</p>
+        
+        <h2>Key-value stores basics</h2>
+        
+        <p>The essence of a key-value store is the ability to store some data, called <em>value</em>, inside a key. This data can later be retrieved only if we know the exact key used to store it. There is no way to search something by value. In a sense, it is like a very large hash/dictionary, but it is persistent, i.e. when your application ends, the data doesn't go away. So for example I can use the command SET to store the value <em>bar</em> at key <em>foo</em>:</p>
+        
+        <pre><code>SET foo bar&#x000A;</code></pre>
+        
+        <p>Redis will store our data permanently, so we can later ask for "<em>What is the value stored at key foo?</em>" and Redis will reply with <em>bar</em>:</p>
+        
+        <pre><code>GET foo =&gt; bar&#x000A;</code></pre>
+        
+        <p>Other common operations provided by key-value stores are DEL used to delete a given key, and the associated value, SET-if-not-exists (called SETNX on Redis) that sets a key only if it does not already exist, and INCR that is able to atomically increment a number stored at a given key:</p>
+        
+        <pre><code>SET foo 10&#x000A;INCR foo =&gt; 11&#x000A;INCR foo =&gt; 12&#x000A;INCR foo =&gt; 13&#x000A;</code></pre>
+        
+        <h2>Atomic operations</h2>
+        
+        <p>So far it should be pretty simple, but there is something special about INCR. Think about this, why to provide such an operation if we can do it ourselves with a bit of code? After all it is as simple as:</p>
+        
+        <pre><code>x = GET foo&#x000A;x = x + 1&#x000A;SET foo x&#x000A;</code></pre>
+        
+        <p>The problem is that doing the increment this way will work as long as there is only a client working with the value <em>x</em> at a time. See what happens if two computers are accessing this data at the same time:</p>
+        
+        <pre><code>x = GET foo (yields 10)&#x000A;y = GET foo (yields 10)&#x000A;x = x + 1 (x is now 11)&#x000A;y = y + 1 (y is now 11)&#x000A;SET foo x (foo is now 11)&#x000A;SET foo y (foo is now 11)&#x000A;</code></pre>
+        
+        <p>Something is wrong with that! We incremented the value two times, but instead to go from 10 to 12 our key holds 11. This is because the INCR operation done with <code>GET / increment / SET</code> <em>is not an atomic operation</em>. Instead the INCR provided by Redis, Memcached, ..., are atomic implementations, the server will take care to protect the get-increment-set for all the time needed to complete in order to prevent simultaneous accesses.</p>
+        
+        <p>What makes Redis different from other key-value stores is that it provides more operations similar to INCR that can be used together to model complex problems. This is why you can use Redis to write whole web applications without using an SQL database and without going crazy.</p>
+        
+        <h2>Beyond key-value stores</h2>
+        
+        <p>In this section we will see what Redis features we need to build our Twitter clone. The first thing to know is that Redis values can be more than strings. Redis supports Lists and Sets as values, and there are atomic operations to operate against this more advanced values so we are safe even with multiple accesses against the same key. Let's start from Lists:</p>
+        
+        <pre><code>LPUSH mylist a (now mylist holds one element list 'a')&#x000A;LPUSH mylist b (now mylist holds 'b,a')&#x000A;LPUSH mylist c (now mylist holds 'c,b,a')&#x000A;</code></pre>
+        
+        <p>LPUSH means <em>Left Push</em>, that is, add an element to the left (or to the head) of the list stored at <em>mylist</em>. If the key <em>mylist</em> does not exist it is automatically created by Redis as an empty list before the PUSH operation. As you can imagine, there is also the RPUSH operation that adds the element on the right of the list (on the tail).</p>
+        
+        <p>This is very useful for our Twitter clone. Updates of users can be stored into a list stored at <code>username:updates</code> for instance. There are operations to get data or information from Lists of course. For instance LRANGE returns a range of the list, or the whole list.</p>
+        
+        <pre><code>LRANGE mylist 0 1 =&gt; c,b&#x000A;</code></pre>
+        
+        <p>LRANGE uses zero-based indexes, that is the first element is 0, the second 1, and so on. The command arguments are <code>LRANGE key first-index last-index</code>. The <em>last index</em> argument can be negative, with a special meaning: -1 is the last element of the list, -2 the penultimate, and so on. So in order to get the whole list we can use:</p>
+        
+        <pre><code>LRANGE mylist 0 -1 =&gt; c,b,a&#x000A;</code></pre>
+        
+        <p>Other important operations are LLEN that returns the length of the list, and LTRIM that is like LRANGE but instead of returning the specified range <em>trims</em> the list, so it is like <em>Get range from mylist, Set this range as new value</em> but atomic. We will use only this List operations, but make sure to check the <a href="http://code.google.com/p/redis/wiki/README">Redis documentation</a> to discover all the List operations supported by Redis.</p>
+        
+        <h2>The set data type</h2>
+        
+        <p>There is more than Lists, Redis also supports Sets, that are unsorted collection of elements. It is possible to add, remove, and test for existence of members, and perform intersection between different Sets. Of course it is possible to ask for the list or the number of elements of a Set. Some example will make it more clear. Keep in mind that SADD is the <em>add to set</em> operation, SREM is the <em>remove from set</em> operation, <em>sismember</em> is the <em>test if it is a member</em> operation, and SINTER is <em>perform intersection</em> operation. Other operations are SCARD that is used to get the cardinality (the number of elements) of a Set, and SMEMBERS that will return all the members of a Set.</p>
+        
+        <pre><code>SADD myset a&#x000A;SADD myset b&#x000A;SADD myset foo&#x000A;SADD myset bar&#x000A;SCARD myset =&gt; 4&#x000A;SMEMBERS myset =&gt; bar,a,foo,b&#x000A;</code></pre>
+        
+        <p>Note that SMEMBERS does not return the elements in the same order we added them, since Sets are <em>unsorted</em> collections of elements. When you want to store the order it is better to use Lists instead. Some more operations against Sets:</p>
+        
+        <pre><code>SADD mynewset b&#x000A;SADD mynewset foo&#x000A;SADD mynewset hello&#x000A;SINTER myset mynewset =&gt; foo,b&#x000A;</code></pre>
+        
+        <p>SINTER can return the intersection between Sets but it is not limited to two sets, you may ask for intersection of 4,5 or 10000 Sets. Finally let's check how SISMEMBER works:</p>
+        
+        <pre><code>SISMEMBER myset foo =&gt; 1&#x000A;SISMEMBER myset notamember =&gt; 0&#x000A;</code></pre>
+        
+        <p>Okay, I think we are ready to start coding!</p>
+        
+        <h2>Prerequisites</h2>
+        
+        <p>If you didn't download it already please grab the <a href="http://code.google.com/p/redis/downloads/list">source code of Retwis</a>. It's a simple tar.gz file with a few of PHP files inside. The implementation is very simple. You will find the PHP library client inside (redis.php) that is used to talk with the Redis server from PHP. This library was written by <a href="http://qix.it">Ludovico Magnocavallo</a> and you are free to reuse this in your own projects, but for updated version of the library please download the Redis distribution. (Note: there are now better PHP libraries available, check our <a href="/clients.html">clients page</a>.</p>
+        
+        <p>Another thing you probably want is a working Redis server. Just get the source, compile with make, and run with ./redis-server and you are done. No configuration is required at all in order to play with it or to run Retwis in your computer.</p>
+        
+        <h2>Data layout</h2>
+        
+        <p>Working with a relational database this is the stage were the database layout should be produced in form of tables, indexes, and so on. We don't have tables, so what should be designed? We need to identify what keys are needed to represent our objects and what kind of values this keys need to hold.</p>
+        
+        <p>Let's start from Users. We need to represent this users of course, with the username, userid, password, followers and following users, and so on. The first question is, what should identify an user inside our system? The username can be a good idea since it is unique, but it is also too big, and we want to stay low on memory. So like if our DB was a relational one we can associate an unique ID to every user. Every other reference to this user will be done by id. That's very simple to do, because we have our atomic INCR operation! When we create a new user we can do something like this, assuming the user is called "antirez":</p>
+        
+        <pre><code>INCR global:nextUserId =&gt; 1000&#x000A;SET uid:1000:username antirez&#x000A;SET uid:1000:password p1pp0&#x000A;</code></pre>
+        
+        <p>We use the <em>global:nextUserId</em> key in order to always get an unique ID for every new user. Then we use this unique ID to populate all the other keys holding our user data. <em>This is a Design Pattern</em> with key-values stores! Keep it in mind.
+        Besides the fields already defined, we need some more stuff in order to fully define an User. For example sometimes it can be useful to be able to get the user ID from the username, so we set this key too:</p>
+        
+        <pre><code>SET username:antirez:uid 1000&#x000A;</code></pre>
+        
+        <p>This may appear strange at first, but remember that we are only able to access data by key! It's not possible to tell Redis to return the key that holds a specific value. This is also <em>our strength</em>, this new paradigm is forcing us to organize the data so that everything is accessible by <em>primary key</em>, speaking with relational DBs language.</p>
+        
+        <h2>Following, followers and updates</h2>
+        
+        <p>There is another central need in our system. Every user has followers users and following users. We have a perfect data structure for this work! That is... Sets. So let's add this two new fields to our schema:</p>
+        
+        <pre><code>uid:1000:followers =&gt; Set of uids of all the followers users&#x000A;uid:1000:following =&gt; Set of uids of all the following users&#x000A;</code></pre>
+        
+        <p>Another important thing we need is a place were we can add the updates to display in the user home page. We'll need to access this data in chronological order later, from the most recent update to the older ones, so the perfect kind of Value for this work is a List. Basically every new update will be LPUSHed in the user updates key, and thanks to LRANGE we can implement pagination and so on. Note that we use the words <em>updates</em> and <em>posts</em> interchangeably, since updates are actually "little posts" in some way.</p>
+        
+        <pre><code>uid:1000:posts =&gt; a List of post ids, every new post is LPUSHed here.&#x000A;</code></pre>
+        
+        <h2>Authentication</h2>
+        
+        <p>OK, we have more or less everything about the user, but authentication. We'll handle authentication in a simple but robust way: we don't want to use PHP sessions or other things like this, our system must be ready in order to be distributed among different servers, so we'll take the whole state in our Redis database. So all we need is a random string to set as the cookie of an authenticated user, and a key that will tell us what is the user ID of the client holding such a random string. We need two keys in order to make this thing working in a robust way:</p>
+        
+        <pre><code>SET uid:1000:auth fea5e81ac8ca77622bed1c2132a021f9&#x000A;SET auth:fea5e81ac8ca77622bed1c2132a021f9 1000&#x000A;</code></pre>
+        
+        <p>In order to authenticate an user we'll do this simple work (<code>login.php</code>):
+         * Get the username and password via the login form
+         * Check if the username:<code>&lt;username&gt;</code>:uid key actually exists
+         * If it exists we have the user id, (i.e. 1000)
+         * Check if uid:1000:password matches, if not, error message
+         * Ok authenticated! Set "fea5e81ac8ca77622bed1c2132a021f9" (the value of uid:1000:auth) as "auth" cookie</p>
+        
+        <p>This is the actual code:</p>
+        
+        <pre><code>include("retwis.php");&#x000A;&#x000A;# Form sanity checks&#x000A;if (!gt("username") || !gt("password"))&#x000A;    goback("You need to enter both username and password to login.");&#x000A;&#x000A;# The form is OK, check if the username is available&#x000A;$username = gt("username");&#x000A;$password = gt("password");&#x000A;$r = redisLink();&#x000A;$userid = $r-&gt;get("username:$username:id");&#x000A;if (!$userid)&#x000A;    goback("Wrong username or password");&#x000A;$realpassword = $r-&gt;get("uid:$userid:password");&#x000A;if ($realpassword != $password)&#x000A;    goback("Wrong useranme or password");&#x000A;&#x000A;# Username / password OK, set the cookie and redirect to index.php&#x000A;$authsecret = $r-&gt;get("uid:$userid:auth");&#x000A;setcookie("auth",$authsecret,time()+3600*24*365);&#x000A;header("Location: index.php");&#x000A;</code></pre>
+        
+        <p>This happens every time the users log in, but we also need a function isLoggedIn in order to check if a given user is already authenticated or not. These are the logical steps preformed by the <code>isLoggedIn</code> function:
+         * Get the "auth" cookie from the user. If there is no cookie, the user is not logged in, of course. Let's call the value of this cookie <code>&lt;authcookie&gt;</code>
+         * Check if auth:<code>&lt;authcookie&gt;</code> exists, and what the value (the user id) is (1000 in the example).
+         * In order to be sure check that uid:1000:auth matches.
+         * OK the user is authenticated, and we loaded a bit of information in the $User global variable.</p>
+        
+        <p>The code is simpler than the description, possibly:</p>
+        
+        <pre><code>function isLoggedIn() {&#x000A;    global $User, $_COOKIE;&#x000A;&#x000A;    if (isset($User)) return true;&#x000A;&#x000A;    if (isset($_COOKIE['auth'])) {&#x000A;        $r = redisLink();&#x000A;        $authcookie = $_COOKIE['auth'];&#x000A;        if ($userid = $r-&gt;get("auth:$authcookie")) {&#x000A;            if ($r-&gt;get("uid:$userid:auth") != $authcookie) return false;&#x000A;            loadUserInfo($userid);&#x000A;            return true;&#x000A;        }&#x000A;    }&#x000A;    return false;&#x000A;}&#x000A;&#x000A;function loadUserInfo($userid) {&#x000A;    global $User;&#x000A;&#x000A;    $r = redisLink();&#x000A;    $User['id'] = $userid;&#x000A;    $User['username'] = $r-&gt;get("uid:$userid:username");&#x000A;    return true;&#x000A;}&#x000A;</code></pre>
+        
+        <p><code>loadUserInfo</code> as separated function is an overkill for our application, but it's a good template for a complex application. The only thing it's missing from all the authentication is the logout. What we do on logout? That's simple, we'll just change the random string in uid:1000:auth, remove the old auth:<code>&lt;oldauthstring&gt;</code> and add a new auth:<code>&lt;newauthstring&gt;</code>.</p>
+        
+        <p><em>Important:</em> the logout procedure explains why we don't just authenticate the user after the lookup of auth:<code>&lt;randomstring&gt;</code>, but double check it against uid:1000:auth. The true authentication string is the latter, the auth:<code>&lt;randomstring&gt;</code> is just an authentication key that may even be volatile, or if there are bugs in the program or a script gets interrupted we may even end with multiple auth:<code>&lt;something&gt;</code> keys pointing to the same user id. The logout code is the following (logout.php):</p>
+        
+        <pre><code>include("retwis.php");&#x000A;&#x000A;if (!isLoggedIn()) {&#x000A;    header("Location: index.php");&#x000A;    exit;&#x000A;}&#x000A;&#x000A;$r = redisLink();&#x000A;$newauthsecret = getrand();&#x000A;$userid = $User['id'];&#x000A;$oldauthsecret = $r-&gt;get("uid:$userid:auth");&#x000A;&#x000A;$r-&gt;set("uid:$userid:auth",$newauthsecret);&#x000A;$r-&gt;set("auth:$newauthsecret",$userid);&#x000A;$r-&gt;delete("auth:$oldauthsecret");&#x000A;&#x000A;header("Location: index.php");&#x000A;</code></pre>
+        
+        <p>That is just what we described and should be simple to understand.</p>
+        
+        <h2>Updates</h2>
+        
+        <p>Updates, also known as posts, are even simpler. In order to create a new post on the database we do something like this:</p>
+        
+        <pre><code>INCR global:nextPostId =&gt; 10343&#x000A;SET post:10343 "$owner_id|$time|I'm having fun with Retwis"&#x000A;</code></pre>
+        
+        <p>As you can see the user id and time of the post are stored directly inside the string, we don't need to lookup by time or user id in the example application so it is better to compact everything inside the post string.</p>
+        
+        <p>After we create a post we obtain the post id. We need to LPUSH this post id in every user that's following the author of the post, and of course in the list of posts of the author. This is the file update.php that shows how this is performed:</p>
+        
+        <pre><code>include("retwis.php");&#x000A;&#x000A;if (!isLoggedIn() || !gt("status")) {&#x000A;    header("Location:index.php");&#x000A;    exit;&#x000A;}&#x000A;&#x000A;$r = redisLink();&#x000A;$postid = $r-&gt;incr("global:nextPostId");&#x000A;$status = str_replace("\n"," ",gt("status"));&#x000A;$post = $User['id']."|".time()."|".$status;&#x000A;$r-&gt;set("post:$postid",$post);&#x000A;$followers = $r-&gt;smembers("uid:".$User['id'].":followers");&#x000A;if ($followers === false) $followers = Array();&#x000A;$followers[] = $User['id']; /* Add the post to our own posts too */&#x000A;&#x000A;foreach($followers as $fid) {&#x000A;    $r-&gt;push("uid:$fid:posts",$postid,false);&#x000A;}&#x000A;# Push the post on the timeline, and trim the timeline to the&#x000A;# newest 1000 elements.&#x000A;$r-&gt;push("global:timeline",$postid,false);&#x000A;$r-&gt;ltrim("global:timeline",0,1000);&#x000A;&#x000A;header("Location: index.php");&#x000A;</code></pre>
+        
+        <p>The core of the function is the <code>foreach</code>. We get using SMEMBERS all the followers of the current user, then the loop will LPUSH the post against the uid:<code>&lt;userid&gt;</code>:posts of every follower.</p>
+        
+        <p>Note that we also maintain a timeline with all the posts. In order to do so what is needed is just to LPUSH the post against global:timeline. Let's face it, do you start thinking it was a bit strange to have to sort things added in chronological order using ORDER BY with SQL? I think so indeed.</p>
+        
+        <h2>Paginating updates</h2>
+        
+        <p>Now it should be pretty clear how we can user LRANGE in order to get ranges of posts, and render this posts on the screen. The code is simple:</p>
+        
+        <pre><code>function showPost($id) {&#x000A;    $r = redisLink();&#x000A;    $postdata = $r-&gt;get("post:$id");&#x000A;    if (!$postdata) return false;&#x000A;&#x000A;    $aux = explode("|",$postdata);&#x000A;    $id = $aux[0];&#x000A;    $time = $aux[1];&#x000A;    $username = $r-&gt;get("uid:$id:username");&#x000A;    $post = join(array_splice($aux,2,count($aux)-2),"|");&#x000A;    $elapsed = strElapsed($time);&#x000A;    $userlink = "&lt;a class=\"username\" href=\"profile.php?u=".urlencode($username)."\"&gt;".utf8entities($username)."&lt;/a&gt;";&#x000A;&#x000A;    echo('&lt;div class="post"&gt;'.$userlink.' '.utf8entities($post)."&lt;br&gt;");&#x000A;    echo('&lt;i&gt;posted '.$elapsed.' ago via web&lt;/i&gt;&lt;/div&gt;');&#x000A;    return true;&#x000A;}&#x000A;&#x000A;function showUserPosts($userid,$start,$count) {&#x000A;    $r = redisLink();&#x000A;    $key = ($userid == -1) ? "global:timeline" : "uid:$userid:posts";&#x000A;    $posts = $r-&gt;lrange($key,$start,$start+$count);&#x000A;    $c = 0;&#x000A;    foreach($posts as $p) {&#x000A;        if (showPost($p)) $c++;&#x000A;        if ($c == $count) break;&#x000A;    }&#x000A;    return count($posts) == $count+1;&#x000A;}&#x000A;</code></pre>
+        
+        <p><code>showPost</code> will simply convert and print a Post in HTML while <code>showUserPosts</code> get range of posts passing them to <code>showPosts</code>.</p>
+        
+        <h2>Following users</h2>
+        
+        <p>If user id 1000 (antirez) wants to follow user id 1001 (pippo), we can do this with just two SADD:</p>
+        
+        <p>SADD uid:1000:following 1001
+        SADD uid:1001:followers 1000</p>
+        
+        <p>Note the same pattern again and again, in theory with a relational database the list of following and followers is a single table with fields like <code>following_id</code> and <code>follower_id</code>. With queries you can extract the followers or following of every user. With a key-value DB that's a bit different as we need to set both the <code>1000 is following 1001</code> and <code>1001 is followed by 1000</code> relations. This is the price to pay, but on the other side accessing the data is simpler and ultra-fast. And having this things as separated sets allows us to do interesting stuff, for example using SINTER we can have the intersection of 'following' of two different users, so we may add a feature to our Twitter clone so that it is able to say you at warp speed, when you visit somebody' else profile, "you and foobar have 34 followers in common" and things like that.</p>
+        
+        <p>You can find the code that sets or removes a following/follower relation at follow.php. It is trivial as you can see.</p>
+        
+        <h2>Making it horizontally scalable</h2>
+        
+        <p>Gentle reader, if you reached this point you are already an hero, thank you. Before to talk about scaling horizontally it is worth to check the performances on a single server. Retwis is <em>amazingly fast</em>, without any kind of cache. On a very slow and loaded server, apache benchmark with 100 parallel clients issuing 100000 requests measured the average pageview to take 5 milliseconds. This means you can serve millions of users every day with just a single Linux box, and this one was monkey asses slow! Go figure with more recent hardware.</p>
+        
+        <p>So, first of all, probably you will not need more than one server for a lot of applications, even when you have a lot of users. But let's assume we <em>are</em> Twitter and need to handle a huge amount of traffic. What to do?</p>
+        
+        <h2>Hashing the key</h2>
+        
+        <p>The first thing to do is to hash the key and issue the request on different servers based on the key hash. There are a lot of well known algorithms to do so, for example check the Redis Ruby library client that implements <em>consistent hashing</em>, but the general idea is that you can turn your key into a number, and than take the reminder of the division of this number by the number of servers you have:</p>
+        
+        <pre><code>server_id = crc32(key) % number_of_servers&#x000A;</code></pre>
+        
+        <p>This has a lot of problems since if you add one server you need to move too much keys and so on, but this is the general idea even if you use a better hashing scheme like consistent hashing.</p>
+        
+        <p>Ok, are key accesses distributed among the key space? Well, all the user data will be partitioned among different servers. There are no inter-keys operations used (like SINTER, otherwise you need to care that things you want to intersect will end in the same server. <em>This is why Redis unlike memcached does not force a specific hashing scheme, it's application specific</em>). Btw there are keys that are accessed more frequently.</p>
+        
+        <h2>Special keys</h2>
+        
+        <p>For example every time we post a new message, we <em>need</em> to increment the <code>global:nextPostId</code> key. How to fix this problem? A Single server will get a lot if increments. The simplest way to handle this is to have a dedicated server just for increments. This is probably an overkill btw unless you have really a lot of traffic. There is another trick. The ID does not really need to be an incremental number, but just <em>it needs to be unique</em>. So you can get a random string long enough to be unlikely (almost impossible, if it's md5-size) to collide, and you are done. We successfully eliminated our main problem to make it really horizontally scalable!</p>
+        
+        <p>There is another one: global:timeline. There is no fix for this, if you need to take something in order you can split among different servers and <em>then merge</em> when you need to get the data back, or take it ordered and use a single key. Again if you really have so much posts per second, you can use a single server just for this. Remember that with commodity hardware Redis is able to handle 100000 writes for second, that's enough even for Twitter, I guess.</p>
+        
+        <p>Please feel free to use the comments below for questions and feedbacks.</p>
+      </article>
+    </div>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+    <script src='/js/foot.js'></script>
+  </body>
+</html>

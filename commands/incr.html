@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+          <p><strong>时间复杂度：</strong> O(1)。</p>
+        </div>
+        
+        <p>对key对应的数字做加1操作。如果key不存在，那么在操作之前，这个key对应的值会被置为0。如果key有一个错误类型的value或者是一个不能表示成数字的字符串，就返回错误。这个操作最大支持在64位有符号的整型数字。
+</p><p>提醒：这是一个string操作，因为Redis没有专用的数字类型。key对应的string都被解释成10进制64位有符号的整型来执行这个操作。
+</p><p>Redis会用相应的整数表示方法存储整数，所以对于表示数字的字符串，没必要为了用字符串表示整型存储做额外开销。
+
+</p>
+        
+        <h2>返回值</h2>
+        
+        <p><a href="/topics/protocol.html#integer-reply">整型数字</a>：增加之后的value</p>
+        
+        <h2>列子</h2>
+        
+         <div class='example' data-session='e8cbab1667f3647d73e24742216122ca'>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>SET mykey "10"</span>
+          <pre>OK</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>INCR mykey</span>
+          <pre>(integer) 11</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>GET mykey</span>
+          <pre>"11"</pre><form>
+            <span class='monospace prompt'>redis>&nbsp;</span>
+            <input autocomplete='off' name='command' spellcheck='false' type='text' />
+          </form></div>
+        
+          <h2>Pattern: Counter</h2>
+        
+        <p>The counter pattern is the most obvious thing you can do with Redis atomic
+        increment operations.
+        The idea is simply send an <a href="/commands/incr.html">INCR</a> command to Redis every time an operation
+        occurs.
+        For instance in a web application we may want to know how many page views this
+        user did every day of the year.</p>
+        
+        <p>To do so the web application may simply increment a key every time the user
+        performs a page view, creating the key name concatenating the User ID and a
+        string representing the current date.</p>
+        
+        <p>This simple pattern can be extended in many ways:</p>
+        
+        <ul>
+        <li>It is possible to use <a href="/commands/incr.html">INCR</a> and <a href="/commands/expire.html">EXPIRE</a> together at every page view to have
+        a counter counting only the latest N page views separated by less than the
+        specified amount of seconds.</li>
+        <li>A client may use GETSET in order to atomically get the current counter value
+        and reset it to zero.</li>
+        <li>Using other atomic increment/decrement commands like <a href="/commands/decr.html">DECR</a> or <a href="/commands/incrby.html">INCRBY</a> it
+        is possible to handle values that may get bigger or smaller depending on the
+        operations performed by the user.
+        Imagine for instance the score of different users in an online game.</li>
+        </ul>
+        
+        <h2>Pattern: Rate limiter</h2>
+        
+        <p>The rate limiter pattern is a special counter that is used to limit the rate at
+        which an operation can be performed.
+        The classical materialization of this pattern involves limiting the number of
+        requests that can be performed against a public API.</p>
+        
+        <p>We provide two implementations of this pattern using <a href="/commands/incr.html">INCR</a>, where we assume
+        that the problem to solve is limiting the number of API calls to a maximum of
+        <em>ten requests per second per IP address</em>.</p>
+        
+        <h2>Pattern: Rate limiter 1</h2>
+        
+        <p>The more simple and direct implementation of this pattern is the following:</p>
+        
+        <pre><code>FUNCTION LIMIT_API_CALL(ip)&#x000A;ts = CURRENT_UNIX_TIME()&#x000A;keyname = ip+&quot;:&quot;+ts&#x000A;current = GET(keyname)&#x000A;IF current != NULL AND current &gt; 10 THEN&#x000A;    ERROR &quot;too many requests per second&quot;&#x000A;ELSE&#x000A;    MULTI&#x000A;        INCR(keyname,1)&#x000A;        EXPIRE(keyname,10)&#x000A;    EXEC&#x000A;    PERFORM_API_CALL()&#x000A;END&#x000A;</code></pre>
+        
+        <p>Basically we have a counter for every IP, for every different second.
+        But this counters are always incremented setting an expire of 10 seconds so that
+        they&#39;ll be removed by Redis automatically when the current second is a different
+        one.</p>
+        
+        <p>Note the used of <a href="/commands/multi.html">MULTI</a> and <a href="/commands/exec.html">EXEC</a> in order to make sure that we&#39;ll both
+        increment and set the expire at every API call.</p>
+        
+        <h2>Pattern: Rate limiter 2</h2>
+        
+        <p>An alternative implementation uses a single counter, but is a bit more complex
+        to get it right without race conditions.
+        We&#39;ll examine different variants.</p>
+        
+        <pre><code>FUNCTION LIMIT_API_CALL(ip):&#x000A;current = GET(ip)&#x000A;IF current != NULL AND current &gt; 10 THEN&#x000A;    ERROR &quot;too many requests per second&quot;&#x000A;ELSE&#x000A;    value = INCR(ip)&#x000A;    IF value == 1 THEN&#x000A;        EXPIRE(value,1)&#x000A;    END&#x000A;    PERFORM_API_CALL()&#x000A;END&#x000A;</code></pre>
+        
+        <p>The counter is created in a way that it only will survive one second, starting
+        from the first request performed in the current second.
+        If there are more than 10 requests in the same second the counter will reach a
+        value greater than 10, otherwise it will expire and start again from 0.</p>
+        
+        <p><strong>In the above code there is a race condition</strong>.
+        If for some reason the client performs the <a href="/commands/incr.html">INCR</a> command but does not perform
+        the <a href="/commands/expire.html">EXPIRE</a> the key will be leaked until we&#39;ll see the same IP address again.</p>
+        
+        <p>This can be fixed easily turning the <a href="/commands/incr.html">INCR</a> with optional <a href="/commands/expire.html">EXPIRE</a> into a Lua
+        script that is send using the <a href="/commands/eval.html">EVAL</a> command (only available since Redis version
+        2.6).</p>
+        
+        <pre><code>local current&#x000A;current = redis.call(&quot;incr&quot;,KEYS[1])&#x000A;if tonumber(current) == 1 then&#x000A;    redis.call(&quot;expire&quot;,KEYS[1],1)&#x000A;end&#x000A;</code></pre>
+        
+        <p>There is a different way to fix this issue without using scripting, but using
+        Redis lists instead of counters.
+        The implementation is more complex and uses more advanced features but has the
+        advantage of remembering the IP addresses of the clients currently performing an
+        API call, that may be useful or not depending on the application.</p>
+        
+        <pre><code>FUNCTION LIMIT_API_CALL(ip)&#x000A;current = LLEN(ip)&#x000A;IF current &gt; 10 THEN&#x000A;    ERROR &quot;too many requests per second&quot;&#x000A;ELSE&#x000A;    IF EXISTS(ip) == FALSE&#x000A;        MULTI&#x000A;            RPUSH(ip,ip)&#x000A;            EXPIRE(ip,1)&#x000A;        EXEC&#x000A;    ELSE&#x000A;        RPUSHX(ip,ip)&#x000A;    END&#x000A;    PERFORM_API_CALL()&#x000A;END&#x000A;</code></pre>
+        
+        <p>The <a href="/commands/rpushx.html">RPUSHX</a> command only pushes the element if the key already exists.</p>
+        
+        <p>Note that we have a race here, but it is not a problem: <a href="/commands/exists.html">EXISTS</a> may return
+        false but the key may be created by another client before we create it inside
+        the <a href="/commands/multi.html">MULTI</a> / <a href="/commands/exec.html">EXEC</a> block.
+        However this race will just miss an API call under rare conditions, so the rate
+        limiting will still work correctly.</p>
+        
+      </article>
+    </div>
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();  // = 'http://redis.cn/commands/'+curCommandObj.key;
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>

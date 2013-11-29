@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+          <p><strong>时间复杂度：</strong> O(N) 这里的N是该操作中要被移除掉的元素个数。</p>
+        </div>
+        
+        <p>修剪(trim)一个已存在的 list，这样 list 就会只包含指定范围的指定元素。<code>start</code> 和 <code>stop</code> 都是由0开始计数的，
+		这里的 <code>0</code> 是列表里的第一个元素（表头），<code>1</code> 是第二个元素，以此类推。</p>
+        
+		<p>例如： <code>LTRIM foobar 0 2</code> 将会对存储在 <code>foobar</code> 的列表进行修剪，只保留列表里的前3个元素。</p>
+        
+		<p><code>start</code> 和 <code>end</code> 也可以用负数来表示与表尾的偏移量，比如 <code>-1</code> 表示列表里的最后一个元素， <code>-2</code> 表示倒数第二个，等等。</p>
+        
+        <p>超过范围的下标并不会产生错误：如果 <code>start</code> 超过列表尾部，或者 <code>start &gt; end</code>，结果会是列表变成空表（即该 key 会被移除）。
+		如果 <code>end</code> 超过列表尾部，Redis 会将其当作列表的最后一个元素。</p>
+        
+		<p><a href="/commands/ltrim.html">LTRIM</a> 的一个常见用法是和 <a href="/commands/lpush.html">LPUSH</a> / <a href="/commands/rpush.html">RPUSH</a> 一起使用。
+		例如：</p>
+        
+        <pre><code>LPUSH mylist someelement&#x000A;LTRIM mylist 0 99&#x000A;</code></pre>
+        
+		<p>这一对命令会将一个新的元素 push 进列表里，并保证该列表不会增长到超过100个元素。这个是很有用的，比如当用 Redis 来存储日志。
+		需要特别注意的是，当用这种方式来使用 <a href="/commands/ltrim.html">LTRIM</a> 的时候，操作的复杂度是 <span class="math">O(1)</span> ，
+		因为平均情况下，每次只有一个元素会被移除。</p>
+        
+        <h2>返回值</h2>
+        
+        <p><a href="/topics/protocol.html#status-reply">状态回复</a></p>
+        
+        <h2>例子</h2>
+        
+        <div class='example' data-session='30ce8f8307f72b33b36064775636c1dc'>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>RPUSH mylist &quot;one&quot;</span>
+          <pre>(integer) 1</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>RPUSH mylist &quot;two&quot;</span>
+          <pre>(integer) 2</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>RPUSH mylist &quot;three&quot;</span>
+          <pre>(integer) 3</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>LTRIM mylist 1 -1</span>
+          <pre>OK</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>LRANGE mylist 0 -1</span>
+          <pre>1) "two"&#x000A;2) "three"</pre><form>
+            <span class='monospace prompt'>redis&gt;&nbsp;</span>
+            <input autocomplete='off' name='command' spellcheck='false' type='text' />
+          </form></div>
+        
+      </article>
+    </div>
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();  // = 'http://redis.cn/commands/'+curCommandObj.key;
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>

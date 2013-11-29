@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+          <p><strong>时间复杂度：</strong> O(1)。</p>
+        </div>
+        
+        <p><a href="/commands/brpop.html">BRPOP</a> 是一个阻塞的列表弹出原语。
+        它是 <a href="/commands/rpop.html">RPOP</a> 的阻塞版本，因为这个命令会在给定list无法弹出任何元素的时候阻塞连接。
+        该命令会按照给出的 key 顺序查看 list，并在找到的第一个非空 list 的尾部弹出一个元素。</p>
+        
+        <p>请在 <a href="/commands/blpop.html">BLPOP 文档</a> 中查看该命令的准确语义，因为 <a href="/commands/brpop.html">BRPOP</a> 和 <a href="/commands/blpop.html">BLPOP</a> 基本是完全一样的，除了它们一个是从尾部弹出元素，而另一个是从头部弹出元素。</p>
+        
+        <h2>返回值</h2>
+        
+        <p><a href="/topics/protocol.html#multi-bulk-reply">多批量回复</a>: 具体来说:</p>
+        
+        <ul>
+        <li>当没有元素可以被弹出时返回一个 <code>nil</code> 的多批量值，并且 timeout 过期。</li>
+        <li>当有元素弹出时会返回一个双元素的多批量值，其中第一个元素是弹出元素的 key，第二个元素是 value。</li>
+        </ul>
+        
+        <h2>例子：</h2>
+        
+        <pre><code>redis&gt; DEL list1 list2&#x000A;(integer) 0&#x000A;redis&gt; RPUSH list1 a b c&#x000A;(integer) 3&#x000A;redis&gt; BRPOP list1 list2 0&#x000A;1) &quot;list1&quot;&#x000A;2) &quot;c&quot;&#x000A;</code></pre>
+        
+      </article>
+    </div>
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();  // = 'http://redis.cn/commands/'+curCommandObj.key + ".html";
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>

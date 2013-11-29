@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+          <p><strong>时间复杂度：</strong> O(1)。</p>
+        </div>
+        
+        <p>如果key不存在，就设置key对应字符串value。在这种情况下，该命令和<a href="/commands/set.html">SET</a>一样。当key已经存在时，就不做任何操作。<a href="/commands/setnx.html">SETNX</a>是"SET if Not eXists"。</p>
+        <h2>返回值</h2>
+        
+        <p><a href="/topics/protocol.html#integer-reply">数字</a>，只有以下两种值：</p>
+         <ul>
+        <li><code>1</code> 如果key被set</li>
+        <li><code>0</code> 如果key没有被set</li>
+        </ul>
+        <h2>列子</h2>
+        
+         <div class='example' data-session='2fddb490d4f70bf84dedb08de5780a45'>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>SETNX mykey "Hello"</span>
+          <pre>(integer) 1</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>SETNX mykey "World"</span>
+          <pre>(integer) 0</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>GET mykey</span>
+          <pre>"Hello"</pre><form>
+            <span class='monospace prompt'>redis>&nbsp;</span>
+            <input autocomplete='off' name='command' spellcheck='false' type='text' />
+          </form></div>
+        
+        <h2>Design pattern: Locking with <code>SETNX</code></h2>
+        
+        <p><a href="/commands/setnx.html">SETNX</a> can be used as a locking primitive.
+        For example, to acquire the lock of the key <code>foo</code>, the client could try the
+        following:</p>
+        
+        <pre><code>SETNX lock.foo &lt;current Unix time + lock timeout + 1&gt;&#x000A;</code></pre>
+        
+        <p>If <a href="/commands/setnx.html">SETNX</a> returns <code>1</code> the client acquired the lock, setting the <code>lock.foo</code> key
+        to the Unix time at which the lock should no longer be considered valid.
+        The client will later use <code>DEL lock.foo</code> in order to release the lock.</p>
+        
+        <p>If <a href="/commands/setnx.html">SETNX</a> returns <code>0</code> the key is already locked by some other client.
+        We can either return to the caller if it&#39;s a non blocking lock, or enter a loop
+        retrying to hold the lock until we succeed or some kind of timeout expires.</p>
+        
+        <h3>Handling deadlocks</h3>
+        
+        <p>In the above locking algorithm there is a problem: what happens if a client
+        fails, crashes, or is otherwise not able to release the lock?
+        It&#39;s possible to detect this condition because the lock key contains a UNIX
+        timestamp.
+        If such a timestamp is equal to the current Unix time the lock is no longer
+        valid.</p>
+        
+        <p>When this happens we can&#39;t just call <a href="/commands/del.html">DEL</a> against the key to remove the lock
+        and then try to issue a <a href="/commands/setnx.html">SETNX</a>, as there is a race condition here, when
+        multiple clients detected an expired lock and are trying to release it.</p>
+        
+        <ul>
+        <li>C1 and C2 read <code>lock.foo</code> to check the timestamp, because they both received
+        <code>0</code> after executing <a href="/commands/setnx.html">SETNX</a>, as the lock is still held by C3 that crashed
+        after holding the lock.</li>
+        <li>C1 sends <code>DEL lock.foo</code></li>
+        <li>C1 sends <code>SETNX lock.foo</code> and it succeeds</li>
+        <li>C2 sends <code>DEL lock.foo</code></li>
+        <li>C2 sends <code>SETNX lock.foo</code> and it succeeds</li>
+        <li><strong>ERROR</strong>: both C1 and C2 acquired the lock because of the race condition.</li>
+        </ul>
+        
+        <p>Fortunately, it&#39;s possible to avoid this issue using the following algorithm.
+        Let&#39;s see how C4, our sane client, uses the good algorithm:</p>
+        
+        <ul>
+        <li><p>C4 sends <code>SETNX lock.foo</code> in order to acquire the lock</p></li>
+        <li><p>The crashed client C3 still holds it, so Redis will reply with <code>0</code> to C4.</p></li>
+        <li><p>C4 sends <code>GET lock.foo</code> to check if the lock expired.
+        If it is not, it will sleep for some time and retry from the start.</p></li>
+        <li><p>Instead, if the lock is expired because the Unix time at <code>lock.foo</code> is older
+        than the current Unix time, C4 tries to perform:</p>
+        
+        <pre><code>GETSET lock.foo &lt;current Unix timestamp + lock timeout + 1&gt;&#x000A;</code></pre></li>
+        <li><p>Because of the <a href="/commands/getset.html">GETSET</a> semantic, C4 can check if the old value stored at
+        <code>key</code> is still an expired timestamp.
+        If it is, the lock was acquired.</p></li>
+        <li><p>If another client, for instance C5, was faster than C4 and acquired the lock
+        with the <a href="/commands/getset.html">GETSET</a> operation, the C4 <a href="/commands/getset.html">GETSET</a> operation will return a non
+        expired timestamp.
+        C4 will simply restart from the first step.
+        Note that even if C4 set the key a bit a few seconds in the future this is
+        not a problem.</p></li>
+        </ul>
+        
+        <p><strong>Important note</strong>: In order to make this locking algorithm more robust, a
+        client holding a lock should always check the timeout didn&#39;t expire before
+        unlocking the key with <a href="/commands/del.html">DEL</a> because client failures can be complex, not just
+        crashing but also blocking a lot of time against some operations and trying
+        to issue <a href="/commands/del.html">DEL</a> after a lot of time (when the LOCK is already held by another
+        client).</p>
+      </article>
+    </div>
+    
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>

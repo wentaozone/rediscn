@@ -1,0 +1,83 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>Redis介绍</title>
+	<meta http-equiv="description" content="redis中文站，redis国内官方网站，Redis全部命令介绍" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <article id='topic'>
+        <h1>Introduction to Redis</h1>
+        
+        <p>Redis is an open source, advanced <strong>key-value store</strong>.  It
+        is often referred to as a <strong>data structure server</strong> since
+        keys can contain <a href="/topics/data-types#strings">strings</a>,
+        <a href="/topics/data-types#hashes">hashes</a>, <a href="/topics/data-types#lists">lists</a>,
+        <a href="/topics/data-types#sets">sets</a> and <a href="/topics/data-types#sorted-sets">sorted
+        sets</a>.</p>
+        
+        <p>You can run <strong>atomic operations</strong>
+        on these types, like <a href="/commands/append">appending to a string</a>;
+        <a href="/commands/hincrby">incrementing the value in a hash</a>; <a href="/commands/lpush">pushing to a
+        list</a>; <a href="/commands/sinter">computing set intersection</a>,
+        <a href="/commands/sunion">union</a> and <a href="/commands/sdiff">difference</a>;
+        or <a href="/commands/zrangebyscore">getting the member with highest ranking in a sorted
+        set</a>.</p>
+        
+        <p>In order to achieve its outstanding performance, Redis works with an
+        <strong>in-memory dataset</strong>. Depending on your use case, you can persist it either
+        by <a href="/topics/persistence#snapshotting">dumping the dataset to disk</a>
+        every once in a while, or by <a href="/topics/persistence#append-only-file">appending each command to a
+        log</a>.</p>
+        
+        <p>Redis also supports trivial-to-setup <a href="/topics/replication">master-slave
+        replication</a>, with very fast non-blocking first
+        synchronization, auto-reconnection on net split and so forth.</p>
+        
+        <p>Other features include a simple <a href="/topics/transactions">check-and-set
+        mechanism</a>, <a href="/topics/pubsub">pub/sub</a>
+        and configuration settings to make Redis behave like a
+        cache.</p>
+        
+        <p>You can use Redis from <a href="/clients">most programming languages</a> out there.</p>
+        
+        <p>Redis is written in <strong>ANSI C</strong> and works in most POSIX systems like Linux,
+        *BSD, OS X and Solaris without external dependencies. There
+        is no official support for Windows builds, although you may
+        have <a href="http://code.google.com/p/redis/issues/detail?id=34">some</a>
+        <a href="https://github.com/dmajkic/redis">options</a>.</p>
+      </article>
+    </div>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+    <script src='/js/foot.js'></script>
+  </body>
+</html>

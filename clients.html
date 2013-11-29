@@ -1,0 +1,904 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>客户端 -- Redis中文资料站</title>
+	<meta http-equiv="description" content="redis中文资料站，介绍redis全部客户端并推荐各种方式下主流的客户端。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <section id='clients'>
+        <h1>客户端</h1>
+        <p>
+          <span class="star">&#9733;</span>表示该语言的推荐客户端。
+        </p>
+        <h2 id='ActionScript'>ActionScript</h2>
+        <table>
+          <tr>
+            <td>
+              as3redis
+            </td>
+            <td>
+              <a href='https://github.com/claus/as3redis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/cwahlers'>cwahlers</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+        </table>
+        <h2 id='C'>C</h2>
+        <table>
+          <tr>
+            <td>
+              hiredis
+              <span class='star'>&#9733;</span>
+            </td>
+            <td>
+              <a href='https://github.com/antirez/hiredis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/antirez'>antirez</a>
+              <a href='http://twitter.com/pnoordhuis'>pnoordhuis</a>
+            </td>
+            <td>
+              这是官方的C语言客户端。支持全部的set命令，管道，事件驱动编程
+            </td>
+          </tr>
+          <tr>
+            <td>
+              credis
+            </td>
+            <td>
+              <a href='http://code.google.com/p/credis/source/browse'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/'></a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              libredis
+            </td>
+            <td>
+              <a href='https://github.com/toymachine/libredis'>Repository</a>
+            </td>
+            <td>
+            </td>
+            <td>
+              通过poll，ketama哈希支持在多服务器上并行执行命令
+            </td>
+          </tr>
+        </table>
+        <h2 id='C#'>C#</h2>
+        <table>
+          <tr>
+            <td>
+              ServiceStack.Redis
+              <span class='star'>&#9733;</span>
+            </td>
+            <td>
+              <a href='https://github.com/ServiceStack/ServiceStack.Redis'>Homepage</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/demisbellot'>demisbellot</a>
+            </td>
+            <td>
+              这是Miguel De Icaza写的C#客户端的一个增强版分支。
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Booksleeve
+              <span class='star'>&#9733;</span>
+            </td>
+            <td>
+              <a href='http://code.google.com/p/booksleeve/'>Homepage</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/marcgravell'>marcgravell</a>
+            </td>
+            <td>
+             通过堆交换实现的高性能客户端。
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Sider
+            </td>
+            <td>
+              <a href='http://nuget.org/List/Packages/Sider'>Homepage</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/chakrit'>chakrit</a>
+            </td>
+            <td>
+              .NET4.0提供的简约客户端
+            </td>
+          </tr>
+          <tr>
+            <td>
+              TeamDev Redis Client
+            </td>
+            <td>
+              <a href='http://redis.codeplex.com/'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/TeamDevPerugia'>TeamDevPerugia</a>
+            </td>
+            <td>
+              基于redis-sharp，提供基本通信功能的redis客户端，但是有一些不同的地方。
+            </td>
+          </tr>
+          <tr>
+            <td>
+              redis-sharp
+            </td>
+            <td>
+              <a href='https://github.com/migueldeicaza/redis-sharp'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/migueldeicaza'>migueldeicaza</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+        </table>
+        <h2 id='C++'>C++</h2>
+        <table>
+          <tr>
+            <td>
+              C++ Client
+            </td>
+            <td>
+              <a href='https://github.com/mrpi/redis-cplusplus-client'>Repository</a>
+            </td>
+            <td>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+        </table>
+        <h2 id='Clojure'>Clojure</h2>
+        <table>
+          <tr>
+            <td>
+              redis-clojure
+            </td>
+            <td>
+              <a href='https://github.com/ragnard/redis-clojure'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/ragge'>ragge</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+        </table>
+        <h2 id='Common Lisp'>Common Lisp</h2>
+        <table>
+          <tr>
+            <td>
+              CL-Redis
+            </td>
+            <td>
+              <a href='https://github.com/vseloved/cl-redis'>Repository</a>
+              <a href='http://www.cliki.net/cl-redis'>Homepage</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/BigThingist'>BigThingist</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+        </table>
+        <h2 id='Erlang'>Erlang</h2>
+        <table>
+          <tr>
+            <td>
+              Erldis
+            </td>
+            <td>
+              <a href='https://github.com/japerk/erldis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/dialtone_'>dialtone_</a>
+              <a href='http://twitter.com/japerk'>japerk</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Eredis
+            </td>
+            <td>
+              <a href='https://github.com/wooga/eredis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/wooga'>wooga</a>
+            </td>
+            <td>
+              注重性能的redis客户端
+            </td>
+          </tr>
+        </table>
+		<h2 id='Fancy'>Fancy</h2>
+        <table>
+          <tr>
+            <td>
+              redis.fy
+            </td>
+            <td>
+              <a href='https://github.com/bakkdoor/redis.fy'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/bakkdoor'>bakkdoor</a>
+            </td>
+            <td>
+              A Fancy Redis client library
+            </td>
+          </tr>
+        </table>
+        <h2 id='Go'>Go</h2>
+        <table>
+          <tr>
+            <td>
+              Go-Redis
+            </td>
+            <td>
+              <a href='https://github.com/alphazero/Go-Redis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/SunOf27'>SunOf27</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Tideland RDC
+            </td>
+            <td>
+              <a href='http://code.google.com/p/tideland-rdc/'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/themue'>themue</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              godis
+            </td>
+            <td>
+              <a href='https://github.com/simonz05/godis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/simonz05'>simonz05</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              redis.go
+            </td>
+            <td>
+              <a href='https://github.com/hoisie/redis.go'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/hoisie'>hoisie</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+        </table>
+        <h2 id='Haskell'>Haskell</h2>
+        <table>
+          <tr>
+            <td>
+              redis
+            </td>
+            <td>
+              <a href='http://hackage.haskell.org/package/redis'>Homepage</a>
+            </td>
+            <td>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              haskell-redis
+            </td>
+            <td>
+              <a href='http://bitbucket.org/videlalvaro/redis-haskell/src'>Repository</a>
+              <a href='http://bitbucket.org/videlalvaro/redis-haskell/wiki/Home'>Homepage</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/old_sound'>old_sound</a>
+            </td>
+            <td>
+              不积极维护，支持2.0以下版本
+            </td>
+          </tr>
+        </table>
+        <h2 id='haXe'>haXe</h2>
+        <table>
+          <tr>
+            <td>
+              hxneko-redis
+            </td>
+            <td>
+              <a href='http://code.google.com/p/hxneko-redis/source/browse'>Repository</a>
+              <a href='http://code.google.com/p/hxneko-redis'>Homepage</a>
+            </td>
+            <td>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+        </table>
+        <h2 id='Io'>Io</h2>
+        <table>
+          <tr>
+            <td>
+              iodis
+            </td>
+            <td>
+              <a href='https://github.com/vangberg/iodis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/ichverstehe'>ichverstehe</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+        </table>
+        <h2 id='Java'>Java</h2>
+        <table>
+          <tr>
+            <td>
+              Jedis
+              <span class='star'>&#9733;</span>
+            </td>
+            <td>
+              <a href='https://github.com/xetorthio/jedis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/xetorthio'>xetorthio</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              JRedis
+            </td>
+            <td>
+              <a href='https://github.com/alphazero/jredis'>Repository</a>
+              <a href='http://code.google.com/p/jredis'>Homepage</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/SunOf27'>SunOf27</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              JDBC-Redis
+            </td>
+            <td>
+              <a href='http://code.google.com/p/jdbc-redis/source/browse'>Repository</a>
+              <a href='http://code.google.com/p/jdbc-redis'>Homepage</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/mavcunha'>mavcunha</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              RJC
+            </td>
+            <td>
+              <a href='https://github.com/e-mzungu/rjc'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/e_mzungu'>e_mzungu</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+        </table>
+        <h2 id='Lua'>Lua</h2>
+        <table>
+          <tr>
+            <td>
+              redis-lua
+              <span class='star'>&#9733;</span>
+            </td>
+            <td>
+              <a href='https://github.com/nrk/redis-lua'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/JoL1hAHN'>JoL1hAHN</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              lua-hiredis
+            </td>
+            <td>
+              <a href='https://github.com/agladysh/lua-hiredis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/agladysh'>agladysh</a>
+            </td>
+            <td>
+              Lua bindings for the hiredis library
+            </td>
+          </tr>
+        </table>
+        <h2 id='Node.js'>Node.js</h2>
+        <table>
+          <tr>
+            <td>
+              node_redis
+              <span class='star'>&#9733;</span>
+            </td>
+            <td>
+              <a href='https://github.com/mranney/node_redis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/mranney'>mranney</a>
+            </td>
+            <td>
+              Recommended client for node.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              redis-node-client
+            </td>
+            <td>
+              <a href='https://github.com/fictorial/redis-node-client'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/fictorial'>fictorial</a>
+            </td>
+            <td>
+              不再维护，不支持0.3以上版本
+            </td>
+          </tr>
+        </table>
+        <h2 id='Objective-C'>Objective-C</h2>
+        <table>
+          <tr>
+            <td>
+              ObjCHiredis
+            </td>
+            <td>
+              <a href='https://github.com/lp/ObjCHiredis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/loopole'>loopole</a>
+            </td>
+            <td>
+              iOS4设备和模拟器的静态库，为MacOS10.5及以上版本增加Objective-C框架。
+            </td>
+          </tr>
+        </table>
+        <h2 id='Perl'>Perl</h2>
+        <table>
+          <tr>
+            <td>
+              Redis
+              <span class='star'>&#9733;</span>
+            </td>
+            <td>
+              <a href='https://github.com/melo/perl-redis'>Repository</a>
+              <a href='http://search.cpan.org/dist/Redis'>Homepage</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/pedromelo'>pedromelo</a>
+            </td>
+            <td>
+              Redis数据库的Perl 绑定。
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Redis::hiredis
+            </td>
+            <td>
+              <a href='http://search.cpan.org/dist/Redis-hiredis/'>Homepage</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/neophenix'>neophenix</a>
+            </td>
+            <td>
+              C客户端的Perl绑定
+            </td>
+          </tr>
+          <tr>
+            <td>
+              AnyEvent::Redis
+            </td>
+            <td>
+              <a href='https://github.com/miyagawa/AnyEvent-Redis'>Repository</a>
+              <a href='http://search.cpan.org/dist/AnyEvent-Redis'>Homepage</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/miyagawa'>miyagawa</a>
+            </td>
+            <td>
+              非阻塞的Redis客户端
+            </td>
+          </tr>
+          <tr>
+            <td>
+              MojoX::Redis
+            </td>
+            <td>
+              <a href='https://github.com/und3f/mojox-redis'>Repository</a>
+              <a href='http://search.cpan.org/dist/MojoX-Redis'>Homepage</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/und3f'>und3f</a>
+            </td>
+            <td>
+              Mojolicious的异步Redis客户端
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Danga::Socket::Redis
+            </td>
+            <td>
+              <a href='http://search.cpan.org/dist/Danga-Socket-Redis'>Homepage</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/martinredmond'>martinredmond</a>
+            </td>
+            <td>
+              用Danga::Spcket库实现的异步Redis客户端。
+            </td>
+          </tr>
+        </table>
+        <h2 id='PHP'>PHP</h2>
+        <table>
+          <tr>
+            <td>
+              Predis
+              <span class='star'>&#9733;</span>
+            </td>
+            <td>
+              <a href='https://github.com/nrk/predis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/JoL1hAHN'>JoL1hAHN</a>
+            </td>
+            <td>
+              成熟有支持。
+            </td>
+          </tr>
+          <tr>
+            <td>
+              phpredis
+              <span class='star'>&#9733;</span>
+            </td>
+            <td>
+              <a href='https://github.com/nicolasff/phpredis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/yowgi'>yowgi</a>
+              <a href='http://twitter.com/nicolasff'>nicolasff</a>
+            </td>
+            <td>
+              C语言实现的作为PHP模块的客户端。
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Rediska
+            </td>
+            <td>
+              <a href='https://github.com/Shumkov/Rediska'>Repository</a>
+              <a href='http://rediska.geometria-lab.net'>Homepage</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/shumkov'>shumkov</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              RedisServer
+            </td>
+            <td>
+              <a href='https://github.com/jamm/Memory/blob/master/RedisServer.php'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/OZ'>OZ</a>
+            </td>
+            <td>
+              PHP中为redis提供独立的全功能的类。
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Redisent
+            </td>
+            <td>
+              <a href='https://github.com/jdp/redisent'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/justinpoliey'>justinpoliey</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+        </table>
+        <h2 id='Pure Data'>Pure Data</h2>
+        <table>
+          <tr>
+            <td>
+              Puredis
+            </td>
+            <td>
+              <a href='https://github.com/lp/puredis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/loopole'>loopole</a>
+            </td>
+            <td>
+              同步，异步和订阅客户端。
+            </td>
+          </tr>
+        </table>
+        <h2 id='Python'>Python</h2>
+        <table>
+          <tr>
+            <td>
+              redis-py
+              <span class='star'>&#9733;</span>
+            </td>
+            <td>
+              <a href='https://github.com/andymccurdy/redis-py'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/andymccurdy'>andymccurdy</a>
+            </td>
+            <td>
+              成熟有支持，现在看来适用于python。
+            </td>
+          </tr>
+          <tr>
+            <td>
+              txredis
+            </td>
+            <td>
+              <a href='http://pypi.python.org/pypi/txredis/0.1.1'>Homepage</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/dio_rian'>dio_rian</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              desir
+            </td>
+            <td>
+              <a href='https://github.com/aallamaa/desir'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/aallamaa'>aallamaa</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+        </table>
+        <h2 id='Ruby'>Ruby</h2>
+        <table>
+          <tr>
+            <td>
+              redis-rb
+              <span class='star'>&#9733;</span>
+            </td>
+            <td>
+              <a href='https://github.com/ezmobius/redis-rb'>Repository</a>
+              <a href='http://redis-rb.keyvalue.org'>Homepage</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/ezmobius'>ezmobius</a>
+              <a href='http://twitter.com/soveran'>soveran</a>
+              <a href='http://twitter.com/djanowski'>djanowski</a>
+              <a href='http://twitter.com/pnoordhuis'>pnoordhuis</a>
+            </td>
+            <td>
+              非常稳定和成熟的客户端。为保证最大性能安装redis-rb之前需要安装hiredis gem。
+            </td>
+          </tr>
+          <tr>
+            <td>
+              em-redis
+            </td>
+            <td>
+              <a href='https://github.com/madsimian/em-redis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/madsimian'>madsimian</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+        </table>
+        <h2 id='Scala'>Scala</h2>
+        <table>
+          <tr>
+            <td>
+              scala-redis
+            </td>
+            <td>
+              <a href='https://github.com/acrosa/scala-redis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/alejandrocrosa'>alejandrocrosa</a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              scala-redis
+              <span class='star'>&#9733;</span>
+            </td>
+            <td>
+              <a href='https://github.com/debasishg/scala-redis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/debasishg'>debasishg</a>
+            </td>
+            <td>
+              显然是@alejandrocrosa  之前提供的客户端的一个分支。
+            </td>
+          </tr>
+          <tr>
+            <td>
+              redis-client-scala-netty
+            </td>
+            <td>
+              <a href='https://github.com/andreyk0/redis-client-scala-netty'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/'></a>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+		  <tr>
+            <td>
+              sedis
+            </td>
+            <td>
+              <a href='https://github.com/pk11/sedis'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/pk11'>pk11</a>
+            </td>
+            <td>
+              a thin scala wrapper for the popular Redis Java client, Jedis
+            </td>
+          </tr>
+        </table>
+        <h2 id='Smalltalk'>Smalltalk</h2>
+        <table>
+          <tr>
+            <td>
+              Smalltalk Redis Client
+            </td>
+            <td>
+              <a href='http://www.squeaksource.com/Redis.html'>Repository</a>
+            </td>
+            <td>
+            </td>
+            <td>
+              
+            </td>
+          </tr>
+        </table>
+        <h2 id='Tcl'>Tcl</h2>
+        <table>
+          <tr>
+            <td>
+              Tcl Client
+            </td>
+            <td>
+              <a href='https://github.com/antirez/redis/blob/master/tests/support/redis.tcl'>Repository</a>
+            </td>
+            <td>
+              <a href='http://twitter.com/antirez'>antirez</a>
+            </td>
+            <td>
+              在Redis 测试套件中使用的客户端
+            </td>
+          </tr>
+        </table>
+      </section>
+    </div>
+    
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'clients';
+          var disqus_url = 'http://redis.cn/clients.html';
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+    <script src='/js/foot.js'></script>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+          <p><strong>时间复杂度：</strong> O(S+N)。其中S是起始偏移量，N是指定范围内的元素数量。</p>
+        </div>
+        
+        <p>返回存储在 <code>key</code> 的列表里指定范围内的元素。 
+        <code>start</code> 和 <code>end</code> 偏移量都是基于0的下标，即list的第一个元素下标是<code>0</code>（list的表头），第二个元素下标是<code>1</code>，以此类推。
+        </p>
+        
+        <p>偏移量也可以是负数，表示偏移量是从list尾部开始计数。
+        例如， <code>-1</code> 表示列表的最后一个元素，<code>-2</code> 是倒数第二个，以此类推。</p>
+        
+        <h2>在不同编程语言里，关于求范围函数的一致性</h2>
+        
+        <p>需要注意的是，如果你有一个list，里面的元素是从0到100，那么 <code>LRANGE list 0 10</code> 这个命令会返回11个元素，即最右边的那个元素也会被包含在内。
+        在你所使用的编程语言里，这一点<strong>可能是也可能不是</strong>跟那些求范围有关的函数都是一致的。（像Ruby的 <code>Range.new</code>，<code>Array#slice</code> 
+        或者Python的 <code>range()</code> 函数。）</p>
+        
+        <h2>超过范围的下标</h2>
+        
+        <p>当下标超过list范围的时候不会产生error。
+        如果<code>start</code>比list的尾部下标大的时候，会返回一个空列表。
+        如果<code>stop</code>比list的实际尾部大的时候，Redis会当它是最后一个元素的下标。</p>
+        
+        <h2>返回值</h2>
+        
+        <p><a href="/topics/protocol.html#multi-bulk-reply">多批量回复</a>: 指定范围里的列表元素。</p>
+        
+        <h2>例子</h2>
+        
+        <div class='example' data-session='1118cd06f45d71e3861c19f1f479ddb4'>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>RPUSH mylist &quot;one&quot;</span>
+          <pre>(integer) 1</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>RPUSH mylist &quot;two&quot;</span>
+          <pre>(integer) 2</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>RPUSH mylist &quot;three&quot;</span>
+          <pre>(integer) 3</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>LRANGE mylist 0 0</span>
+          <pre>1) "one"</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>LRANGE mylist -3 2</span>
+          <pre>1) "one"&#x000A;2) "two"&#x000A;3) "three"</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>LRANGE mylist -100 100</span>
+          <pre>1) "one"&#x000A;2) "two"&#x000A;3) "three"</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>LRANGE mylist 5 10</span>
+          <pre>(empty list or set)</pre><form>
+            <span class='monospace prompt'>redis&gt;&nbsp;</span>
+            <input autocomplete='off' name='command' spellcheck='false' type='text' />
+          </form></div>
+        
+      </article>
+    </div>
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();  // = 'http://redis.cn/commands/'+curCommandObj.key;
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>

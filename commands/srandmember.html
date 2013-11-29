@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+          <p><strong>时间复杂度：</strong> Without the count argument O(1), otherwise O(N) where N is the absolute value of the passed count。</p>
+        </div>
+        
+        <p>When called with just the <code>key</code> argument, return a random element from the set value stored at <code>key</code>.</p>
+        
+        <p>Starting from Redis version 2.6, when called with the additional <code>count</code> argument, return an array of <code>count</code> <strong>distinct elements</strong> if <code>count</code> is positive. If called with a negative <code>count</code> the behavior changes and the command is allowed to return the <strong>same element multiple times</strong>. In this case the numer of returned elements is the absolute value of the specified <code>count</code>.</p>
+        
+        <p>When called with just the key argument, the operation is similar to <a href="/commands/spop.html">SPOP</a>, however while <a href="/commands/spop.html">SPOP</a> also removes the randomly selected element from the set, <a href="/commands/srandmember.html">SRANDMEMBER</a> will just return a random element without altering the original set in any way.</p>
+        
+        <h2>Return value</h2>
+        
+        <p><a href="/topics/protocol.html#bulk-reply">Bulk reply</a>: without the additional <code>count</code> argument the command returns a Bulk Reply with the randomly selected element, or <code>nil</code> when <code>key</code> does not exist.
+        <a href="/topics/protocol.html#multi-bulk-reply">Multi-bulk reply</a>: when the additional <code>count</code> argument is passed the command returns an array of elements, or an empty array when <code>key</code> does not exist.</p>
+        
+        <h2>Examples</h2>
+        
+        <div class='example' data-session='7b2dd8c7c4789228909d930f867a30e9'>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>SADD myset one two three</span>
+          <pre>(integer) 3</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>SRANDMEMBER myset</span>
+          <pre>"one"</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>SRANDMEMBER myset 2</span>
+          <pre>1) "three"&#x000A;2) "one"</pre>
+          <span class='monospace prompt'>redis&gt;&nbsp;</span>
+          <span class='monospace command'>SRANDMEMBER myset -5</span>
+          <pre>1) "one"&#x000A;2) "one"&#x000A;3) "one"&#x000A;4) "one"&#x000A;5) "one"</pre><form>
+            <span class='monospace prompt'>redis&gt;&nbsp;</span>
+            <input autocomplete='off' name='command' spellcheck='false' type='text' />
+          </form></div>
+        
+        
+        <h2>Specification of the behavior when count is passed</h2>
+        
+        <p>When a count argument is passed and is positive, the elements are returned
+        as if every selected element is removed from the set (like the extraction
+        of numbers in the game of Bingo). However elements are <strong>not removed</strong> from
+        the Set. So basically:</p>
+        
+        <ul>
+        <li>No repeated elements are returned.</li>
+        <li>If count is bigger than the number of elements inside the Set, the command will only return the whole set without additional elements.</li>
+        </ul>
+        
+        <p>When instead the count is negative, the behavior changes and the extraction happens as if you put the extracted element inside the bag again after every extraction, so repeated elements are possible, and the number of elements requested is always returned as we can repeat the same elements again and again, with the exception of an empty Set (non existing key) that will always produce an empty array as a result.</p>
+        
+        <h2>Distribution of returned elements</h2>
+        
+        <p>The distribution of the returned elements is far from perfect when the number of elements in the set is small, this is due to the fact that we used an approximated random element function that does not really guarantees good distribution.</p>
+        
+        <p>The algorithm used, that is implemented inside dict.c, samples the hash table buckets to find a non-empty one. Once a non empty bucket is found, since we use chaining in our hash table implementation, the number of elements inside the bucked is checked and a random element is selected.</p>
+        
+        <p>This means that if you have two non-empty buckets in the entire hash table, and one has three elements while one has just one, the element that is alone in its bucket will be returned with much higher probability.</p>
+        
+      </article>
+    </div>
+    
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>

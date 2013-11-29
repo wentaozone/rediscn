@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+          <p><strong>时间复杂度：</strong> O(N)，N是要set的keys的个数。</p>
+        </div>
+        
+        <p>对应给定的keys到他们相应的values上。只要有一个key已经存在，<a href="/commands/msetnx.html">MSETNX</a>一个操作都不会执行。
+由于这种特性，<a href="/commands/msetnx.html">MSETNX</a>可以实现要么所有的操作都成功，要么一个都不执行，这样可以用来设置不同的key，来表示一个唯一的对象的不同字段。
+</p><p><a href="/commands/msetnx.html">MSETNX</a>是原子的，所以所有给定的keys是一次性set的。客户端不可能看到这种一部分keys被更新而另外的没有改变的情况。
+
+</p>
+        
+        <h2>返回值</h2>
+        
+        <p><a href="/topics/protocol.html#integer-reply">数字</a>，只有以下两种值：</p>
+        <ul>
+        <li><code>1</code> 如果所有的key被set</li>
+        <li><code>0</code> 如果没有key被set(至少其中有一个key是存在的)</li>
+        </ul>
+        <h2>列子</h2>
+        
+         <div class='example' data-session='09f13551306e8dec8964ca266041a4ff'>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>MSETNX key1 "Hello" key2 "there"</span>
+          <pre>(integer) 1</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>MSETNX key2 "there" key3 "world"</span>
+          <pre>(integer) 0</pre>
+          <span class='monospace prompt'>redis>&nbsp;</span>
+          <span class='monospace command'>MGET key1 key2 key3</span>
+          <pre>1) "Hello"&#x000A;2) "there"&#x000A;3) (nil)</pre><form>
+            <span class='monospace prompt'>redis>&nbsp;</span>
+            <input autocomplete='off' name='command' spellcheck='false' type='text' />
+          </form></div>
+        
+      </article>
+    </div>
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>

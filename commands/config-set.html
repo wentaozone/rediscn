@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+           
+        </div>
+        
+        <p>The <code>CONFIG SET</code> command is used in order to reconfigure the server at runtime
+        without the need to restart Redis. You can change both trivial parameters or
+        switch from one to another persistence option using this command.</p>
+        
+        <p>The list of configuration parameters supported by <code>CONFIG SET</code> can be
+        obtained issuing a <code>CONFIG GET *</code> command, that is the symmetrical command
+        used to obtain information about the configuration of a running
+        Redis instance.</p>
+        
+        <p>All the configuration parameters set using <code>CONFIG SET</code> are immediately loaded
+        by Redis that will start acting as specified starting from the next command
+        executed.</p>
+        
+        <p>All the supported parameters have the same meaning of the equivalent
+        configuration parameter used in the <a href="http://github.com/antirez/redis/raw/2.2/redis.conf">redis.conf</a> file, with the following important differences:</p>
+        
+        <ul>
+        <li>Where bytes or other quantities are specified, it is not possible to use the redis.conf abbreviated form (10k 2gb ... and so forth), everything should be specified as a well formed 64 bit integer, in the base unit of the configuration directive.</li>
+        <li>The save parameter is a single string of space separated integers. Every pair of integers represent a seconds/modifications threshold.</li>
+        </ul>
+        
+        
+        <p>For instance what in redis.conf looks like:</p>
+        
+        <pre><code>save 900 1&#x000A;save 300 10&#x000A;</code></pre>
+        
+        <p>that means, save after 900 seconds if there is at least 1 change to the
+        dataset, and after 300 seconds if there are at least 10 changes to the
+        datasets, should be set using <code>CONFIG SET</code> as "900 1 300 10".</p>
+        
+        <p>It is possible to switch persistence form .rdb snapshotting to append only file
+        (and the other way around) using the <code>CONFIG SET</code> command. For more information
+        about how to do that please check <a href="/topics/persistence.html">persistence page</a>.</p>
+        
+        <p>In general what you should know is that setting the <em>appendonly</em> parameter to
+        <em>yes</em> will start a background process to save the initial append only file
+        (obtained from the in memory data set), and will append all the subsequent
+        commands on the append only file, thus obtaining exactly the same effect of
+        a Redis server that started with AOF turned on since the start.</p>
+        
+        <p>You can have both the AOF enabled with .rdb snapshotting if you want, the
+        two options are not mutually exclusive.</p>
+		
+        <h2>返回值</h2>
+        
+      
+        <p><a href="/topics/protocol.html#status-reply">Status code reply</a>: 设置成功时返回<code>OK</code> 否则返回错误。</p>
+        
+      </article>
+    </div>
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();  // = 'http://redis.cn/commands/'+curCommandObj.key;
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>
