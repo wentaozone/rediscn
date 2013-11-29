@@ -27,22 +27,22 @@
         
         <div class='metadata'>
           <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
-          <p><strong>时间复杂度：</strong> O(N) where N is the total number of elements in all given sets。</p>
+          <p><strong>时间复杂度：</strong> O(N) N为给定所有集合的总数</p>
         </div>
         
-        <p>Returns the members of the set resulting from the union of all the given sets.</p>
+        <p>返回给定的多个集合的并集中的所有成员.</p>
         
-        <p>For example:</p>
+        <p>例如:</p>
         
         <pre><code>key1 = {a,b,c,d}&#x000A;key2 = {c}&#x000A;key3 = {a,c,e}&#x000A;SUNION key1 key2 key3 = {a,b,c,d,e}&#x000A;</code></pre>
         
-        <p>Keys that do not exist are considered to be empty sets.</p>
+        <p>不存在的key可以认为是空的集合.</p>
         
-        <h2>Return value</h2>
+        <h2>返回值</h2>
         
-        <p><a href="/topics/protocol.html#multi-bulk-reply">Multi-bulk reply</a>: list with members of the resulting set.</p>
+        <p><a href="/topics/protocol.html#multi-bulk-reply">Multi-bulk reply</a>:并集的成员列表</p>
         
-        <h2>Examples</h2>
+        <h2>举例</h2>
         
         <div class='example' data-session='07db6594b8125b43901570de7d5fe640'>
           <span class='monospace prompt'>redis&gt;&nbsp;</span>
