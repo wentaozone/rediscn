@@ -9,5 +9,5 @@
 /commands/expireat.html 	阿昊      2013-09-29    已更新
 /commands/migrate.html.html     阿昊      2013-09-29    已更新
 /commands/Lists的所有command    A-wu    2013-10-31    翻译中
-/commands/smove.html           breakwang  2013-11-31   应更新
+/commands/smove.html           breakwang  2013-11-31   翻译完成
 /commands/set的余下命令        breakwang  2013-12-02   翻译中
