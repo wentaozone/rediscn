@@ -11,3 +11,4 @@
 /commands/Lists的所有command    A-wu    2013-10-31    翻译中
 /commands/smove.html           breakwang  2013-11-31   翻译完成
 /commands/set的余下命令        breakwang  2013-12-02   翻译中
+/topics/data-types.html        jerrypy    2013-12-01   翻译中
