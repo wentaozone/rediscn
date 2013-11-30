@@ -27,23 +27,22 @@
         
         <div class='metadata'>
           <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
-          <p><strong>时间复杂度：</strong> O(N) where N is the total number of elements in all given sets。</p>
+          <p><strong>时间复杂度：</strong> O(N) N是给定集合中元素的个数.</p>
         </div>
         
-        <p>Returns the members of the set resulting from the difference between the first
-        set and all the successive sets.</p>
+        <p>返回一个集合与给定集合的差集的元素.</p>
         
-        <p>For example:</p>
+        <p>举例:</p>
         
         <pre><code>key1 = {a,b,c,d}&#x000A;key2 = {c}&#x000A;key3 = {a,c,e}&#x000A;SDIFF key1 key2 key3 = {b,d}&#x000A;</code></pre>
         
-        <p>Keys that do not exist are considered to be empty sets.</p>
+        <p>不存在的key认为是空集.</p>
         
-        <h2>Return value</h2>
+        <h2>返回值</h2>
         
-        <p><a href="/topics/protocol.html#multi-bulk-reply">Multi-bulk reply</a>: list with members of the resulting set.</p>
+        <p><a href="/topics/protocol.html#multi-bulk-reply">Multi-bulk reply</a>:结果集的元素.</p>
         
-        <h2>Examples</h2>
+    
         
         <div class='example' data-session='c38db39c674f9a845a777e2db14d7c4f'>
           <span class='monospace prompt'>redis&gt;&nbsp;</span>

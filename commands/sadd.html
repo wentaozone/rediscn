@@ -27,23 +27,21 @@
         
         <div class='metadata'>
           <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
-          <p><strong>时间复杂度：</strong> O(N) where N is the number of members to be added。</p>
+          <p><strong>时间复杂度：</strong> O(N) N是被添加元素的数量.</p>
         </div>
         
-        <p>Add the specified members to the set stored at <code>key</code>. Specified members that
-        are already a member of this set are ignored.  If <code>key</code> does not exist, a new
-        set is created before adding the specified members.</p>
+        <p>添加一个或多个指定的member元素到集合的 <code>key</code>中.指定的一个或者多个元素member 如果已经在集合key中存在则忽略.如果集合<code>key</code> 不存在，则新建集合key,并添加member元素到集合key中.</p>
         
-        <p>An error is returned when the value stored at <code>key</code> is not a set.</p>
+        <p>如果<code>key</code> 的类型不是集合则返回错误.</p>
         
         <h2>返回值</h2>
         
-        <p><a href="/topics/protocol.html#integer-reply">Integer reply</a>: the number of elements that were added to the set, not including all the elements already present into the set.</p>
+        <p><a href="/topics/protocol.html#integer-reply">整数返回</a>:返回新成功添加到集合里元素的数量，不包括已经存在于集合中的元素.</p>
         
         <h2>历史</h2>
         
         <ul>
-        <li><code>&gt;= 2.4</code>: Accepts multiple <code>member</code> arguments. Redis versions before 2.4 are only able to add a single member per call.</li>
+        <li><code>&gt;= 2.4</code>: 接受多个<code>member</code> 参数. Redis 2.4  以前的版本每次只能添加一个member元素.</li>
         </ul>
         
         <h2>列子</h2>
