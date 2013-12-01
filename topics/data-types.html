@@ -29,7 +29,7 @@
         <p>你可以用Redis字符串做许多有趣的事，例如你可以：</p>
         
         <ul>
-        <li>利用INCR命令簇（<a href="/commands/incr">INCR</a>, <a href="/commands/decr">DECR</a>, <a href="/commands/incrby">INCRBY</a>）来把字符串当做原子计数器使用。</li>
+        <li>利用INCR命令簇（<a href="/commands/incr">INCR</a>, <a href="/commands/decr">DECR</a>, <a href="/commands/incrby">INCRBY</a>）来把字符串当作原子计数器使用。</li>
         <li>使用<a href="/commands/append">APPEND</a>命令在字符串后添加内容。</li>
         <li>将字符串作为<a href="/commands/getrange">GETRANGE</a>和<a href="/commands/setrange">SETRANGE</a>的随机访问向量。</li>
         <li>在小空间里编码大量数据，或者使用<a href="/commands/getbit">GETBIT</a>和<a href="/commands/setbit">SETBIT</a>创建一个Redis支持的Bloom过滤器。</li>
@@ -68,7 +68,7 @@
         <ul>
         <li>在社交网络中建立一个时间线模型，使用<a href="/commands/lpush">LPUSH</a>去添加新的元素到用户时间线中，使用<a href="/commands/lrange">LRANGE</a>去检索一些最近插入的条目。</li>
         <li>你可以同时使用<a href="/commands/lpush">LPUSH</a>和<a href="/commands/ltrim">LTRIM</a>去创建一个永远不会超过指定元素数目的列表并同时记住最后的N个元素。</li>
-        <li>列表可以用来当做消息传递的基元（primitive），例如，众所周知的用来创建后台任务的<a href="https://github.com/defunkt/resque">Resque</a> Ruby库。</li>
+        <li>列表可以用来当作消息传递的基元（primitive），例如，众所周知的用来创建后台任务的<a href="https://github.com/defunkt/resque">Resque</a> Ruby库。</li>
         <li>你可以使用列表做更多事，这个数据类型支持许多命令，包括像<a href="/commands/blpop">BLPOP</a>这样的阻塞命令。请查看所有可用的<a href="/commands#list">列表操作命令</a>获取更多的信息。</li>
         </ul>
         
@@ -161,7 +161,7 @@
         同时使用ZRANK和ZRANGE你可以获得与指定用户有相同分数的用户名单。
         所有这些操作都非常<em>迅速</em>。</li>
         <li>有序集合通常用来索引存储在Redis中的数据。
-        例如：如果你有很多的hash来表示用户，那么你可以使用一个有序集合，这个集合的年龄字段用来当做评分，用户ID当做值。用<a href="/commands/zrangebyscore">ZRANGEBYSCORE</a>可以简单快速地检索到给定年龄段的所有用户。</li>
+        例如：如果你有很多的hash来表示用户，那么你可以使用一个有序集合，这个集合的年龄字段用来当作评分，用户ID当作值。用<a href="/commands/zrangebyscore">ZRANGEBYSCORE</a>可以简单快速地检索到给定年龄段的所有用户。</li>
         <li>有序集合或许是最高级的Redis数据类型，所以花些时间查看完整的<a href="/commands#sorted_set">有序集合命令列表</a>去探索你能用Redis干些什么吧！</li>
         </ul>
       </article>
