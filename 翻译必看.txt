@@ -10,4 +10,4 @@
 /commands/migrate.html.html     阿昊      2013-09-29    已更新
 /commands/Lists的所有command    A-wu    2013-10-31    翻译中
 /commands/set的余下命令        breakwang  2013-12-02    翻译完成 
-/topics/data-types.html        jerrypy    2013-12-01   翻译中
+/topics/data-types.html        jerrypy    2013-12-01   翻译完成
