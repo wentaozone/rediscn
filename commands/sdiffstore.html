@@ -27,17 +27,16 @@
         
         <div class='metadata'>
           <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
-          <p><strong>时间复杂度：</strong> O(N) where N is the total number of elements in all given sets。</p>
+          <p><strong>时间复杂度：</strong> O(N) N是给定集合元素的总数。</p>
         </div>
         
-        <p>This command is equal to <a href="/commands/sdiff.html">SDIFF</a>, but instead of returning the resulting set, it
-        is stored in <code>destination</code>.</p>
+        <p>该命令类似于 <a href="/commands/sdiff.html">SDIFF</a>, 不同之处在于该命令不返回结果集，而是将结果存放在<code>destination</code>集合中.</p>
         
-        <p>If <code>destination</code> already exists, it is overwritten.</p>
+        <p>如果<code>destination</code> 已经存在, 则将其覆盖重写.</p>
         
-        <h2>Return value</h2>
+        <h2>返回值</h2>
         
-        <p><a href="/topics/protocol.html#integer-reply">Integer reply</a>: the number of elements in the resulting set.</p>
+        <p><a href="/topics/protocol.html#integer-reply">返回整数</a>: 结果集元素的个数.</p>
         
       </article>
     </div>

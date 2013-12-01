@@ -27,29 +27,27 @@
         
         <div class='metadata'>
           <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
-          <p><strong>时间复杂度：</strong> O(N) where N is the number of members to be removed。</p>
+          <p><strong>时间复杂度：</strong> O(N) N是被移除元素的个数.</p>
         </div>
         
-        <p>Remove the specified members from the set stored at <code>key</code>.
-        Specified members that are not a member of this set are ignored.
-        If <code>key</code> does not exist, it is treated as an empty set and this command returns
-        <code>0</code>.</p>
+        <p>在<code>key</code>集合中移除指定的元素.
+        如果指定的元素不是<code>key</code>集合中的元素则忽略
+        如果<code>key</code>集合不存在则被视为一个空的集合，该命令返回<code>0</code>.</p>
         
-        <p>An error is returned when the value stored at <code>key</code> is not a set.</p>
+        <p>如果<code>key</code>的类型不是一个集合,则返回错误.</p>
         
-        <h2>Return value</h2>
+        <h2>返回值</h2>
         
-        <p><a href="/topics/protocol.html#integer-reply">Integer reply</a>: the number of members that were removed from the set, not
-        including non existing members.</p>
+        <p><a href="/topics/protocol.html#integer-reply">返回整数</a>:从集合中移除元素的个数，不包括不存在的成员.</p>
         
-        <h2>History</h2>
+        <h2>历史</h2>
         
         <ul>
-        <li><code>&gt;= 2.4</code>: Accepts multiple <code>member</code> arguments.
-        Redis versions older than 2.4 can only remove a set member per call.</li>
+        <li><code>&gt;= 2.4</code>: 接受多个 <code>member</code> 元素参数.
+        Redis 2.4 之前的版本每次只能移除一个元素.</li>
         </ul>
         
-        <h2>Examples</h2>
+        <h2>举例</h2>
         
         <div class='example' data-session='7f442a87522b714ceb40a2e8acbbf852'>
           <span class='monospace prompt'>redis&gt;&nbsp;</span>

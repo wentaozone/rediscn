@@ -27,18 +27,18 @@
         
         <div class='metadata'>
           <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
-          <p><strong>时间复杂度：</strong> O(N) where N is the set cardinality.</p>
+          <p><strong>时间复杂度：</strong> O(N) N为集合的基数.</p>
         </div>
         
-        <p>Returns all the members of the set value stored at <code>key</code>.</p>
+        <p>返回<code>key</code>集合所有的元素.</p>
         
-        <p>This has the same effect as running <a href="/commands/sinter.html">SINTER</a> with one argument <code>key</code>.</p>
+        <p>该命令的作用与使用一个参数的<a href="/commands/sinter.html">SINTER</a> 命令作用相同.</p>
         
-        <h2>Return value</h2>
+        <h2>返回值</h2>
         
-        <p><a href="/topics/protocol.html#multi-bulk-reply">Multi-bulk reply</a>: all elements of the set.</p>
+        <p><a href="/topics/protocol.html#multi-bulk-reply">Multi-bulk reply</a>:集合中的所有元素.</p>
         
-        <h2>Examples</h2>
+        <h2>举例</h2>
         
         <div class='example' data-session='e88c265d526bff6e686f3cd5c8ae63aa'>
           <span class='monospace prompt'>redis&gt;&nbsp;</span>
