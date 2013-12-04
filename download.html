@@ -9,7 +9,7 @@
     <script src='/js/app.js'></script>
     <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
     <title>REDIS下载 -- Redis中文资料站</title>
-	<meta http-equiv="description" content="redis下载中心，下载各种版本的redis，包括2.6.16稳定版redid,2.8.0-rc2版本以及win32/64版本" />
+	<meta http-equiv="description" content="redis下载中心，下载各种版本的redis，包括2.8.2稳定版redid,2.8.0-rc2版本以及win32/64版本" />
 	
   </head>
   <body class=''>
@@ -27,23 +27,25 @@
         <table class="versions">
       
           <tr class="current">
-            <td>2.6.16</td>
+            <td>2.8.2</td>
             <td>稳定版</td>
             <td>这是最新的Redis 2.4版本的替换版本，最新的Redis 2.6版本支持Lua脚本，时间能精确到毫秒，改进了内存使用情况，无限制的客户端连接数量，
             AOF改进，更好的性能和一些新的命令功能。完整的新功能列表和修订内容请参考 	
-            <a href="https://github.com/antirez/redis/raw/2.6/00-RELEASENOTES" target="_blank">发布日志</a>
+            <a href="https://github.com/antirez/redis/raw/2.8/00-RELEASENOTES" target="_blank">发布日志</a>
             <br>
             <td>
-              <a href="http://redis.googlecode.com/files/redis-2.6.16.tar.gz">下载</a>
+              <a href="http://redis.googlecode.com/files/redis-2.8.2.tar.gz">下载</a>
             </td>
           </tr>
         
           <tr>
-            <td>2.8.0-rc2</td>
-            <td>候选发布版</td>
+            <td>2.6.16</td>
+            <td>旧版本</td>
             <td>
-             	Redis 2.8 很快会替换掉2.6版本，它进行了重大改进，例如：Replication partial resynchronization ，IPv6的支持，配置重写，Pub/Sub 机制更新等等。
-             	虽然现在还不能用于线上，但是他是个高质量的beta版本。点击<a href="https://github.com/antirez/redis/raw/2.8/00-RELEASENOTES" target="_blank">发布日志</a> 查看关于该版本的改进和变化。
+             	这是Redis 2.4的最新替换版本，相比2.4版本Redis 2.6 支持<a href="/commands/eval.html">Lua 脚本</a>，毫秒级的过期时间，并且提高了内存的使用，允许无限的客户端连接和更高效的AOF更好的性能，以及一些新的命令和功能。
+             	有关2.6版本的完整信息，请查看<a href="https://github.com/antirez/redis/raw/2.6/00-RELEASENOTES">Release Notes</a>。
+            
+            <br>
             </td>
             <td>
               <a href="http://download.redis.io/releases/redis-2.8.0-rc2.tar.gz">下载</a>
@@ -78,7 +80,7 @@
         
         <p>下载，解压和安装：</p>
         
-        <pre><code>$ wget http://redis.googlecode.com/files/redis-2.6.16.tar.gz&#x000A;$ tar xzf redis-2.6.16.tar.gz&#x000A;$ cd redis-2.6.16&#x000A;$ make&#x000A;</code></pre>
+        <pre><code>$ wget http://redis.googlecode.com/files/redis-2.8.2.tar.gz&#x000A;$ tar xzf redis-2.8.2.tar.gz&#x000A;$ cd redis-2.8.2&#x000A;$ make&#x000A;</code></pre>
         
         <p>编译后的可执行文件在src目录中，可以使用下面的命令运行Redis:</p>
         
