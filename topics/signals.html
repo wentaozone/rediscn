@@ -1,7 +1,7 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0039)/topics/signals.html -->
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link href='/css/styles.css' rel='stylesheet' type='text/css' />
     <link href='/images/favicon.png' rel='shortcut icon' />
@@ -9,48 +9,33 @@
     <script src='/js/app.js'></script>
     <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
     <title>Redis中文资料站</title>
-	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
-  </head>
-  <body class=''>
+    <meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。">
+</head>
+<body class="">
     <script src='/js/head.js'></script>
-    <div class='text'>
-      <article id='topic'>
-        <h1>Redis Signals Handling</h1>
+    <div class="text">
+        <article id="topic">        
+        <h1>Redis信号处理</h1>       
+          <p>本文档提供的信息是有关Redis是如何应对不同POSIX系统下产生的信号异常，比如<code>SIGTERM</code>,<code>SIGSEGV</code>等等。</p>
+          <p>本文档中的信息<strong>只适用于Redis2.6或更高版本</strong>。</p>
+          <h2>SIGTERM信号的处理</h2>
+          <p><code>SIGTERM</code>信号会让Redis安全的关闭。Redis收到信号时并不立即退出，而是开启一个定时任务，这个任务就类似执行一次<a href="/commands/shutdown.html">SHUTDOWN</a>命令的。
+            这个定时关闭任务会在当前执行命令终止后立即施行，因此通常有有0.1秒或更少时间延迟。</p>
+          <p>万一Server被一个耗时的LUA脚本阻塞，如果这个脚本可以被<code>SCRIPT KILL</code>命令终止，那么定时执行任务就会在脚本被终止后立即执行，否则直接执行。</p>
+          <p>这种情况下的Shutdown过程也会同时包含以下的操作：</p>
+          <ul>
+              <li>如果存在正在执行RDB文件保存或者AOF重写的子进程，子进程被终止。</li>
+              <li>如果AOF功能是开启的，Redis会通过系统调用<code>fsync</code>将AOF缓冲区数据强制输出到硬盘。</li>
+              <li>如果Redis配置了使用RDB文件进行持久化，那么此时就会进行同步保存。由于保存时同步的，那也就不需要额外的内存。</li>
+              <li>如果Server是守护进程，PID文件会被移除。</li>
+              <li>如果Unix域的Socket是可用的，它也会被移除。</li>
+              <li>Server退出，退出码为0.</li>
+          </ul>
+        <p>万一RDB文件保存失败，Shutdown失败，Server则会继续运行以保证没有数据丢失。自从Redis2.6.11之后，Redis不会再次主动Shutdown，除非它接收到了另一个<code>SIGTERM</code>信号或者另外一个<a href="/commands/shutdown.html">SHUTDOWN</a>命令</p>
+        <h2>SIGSEGV,SIGBUS,SIGFPF和SIGILL信号的处理</h2>
         
-        <p>This document provides information about how Redis reacts to the reception
-        of differe POSIX signals such as <code>SIGTERM</code>, <code>SIGSEGV</code> and so forth.</p>
         
-        <p>The information contained in this document is <strong>only applicable to Redis version 2.6 or greater</strong>.</p>
-        
-        <h2>Handling of SIGTERM</h2>
-        
-        <p>The <code>SIGTERM</code> signals tells Redis to shutdown gracefully. When this signal is
-        received the server does not actually exits as a result, but it schedules
-        a shutdown very similar to the one performed when the <a href="/commands/shutdown.html">SHUTDOWN</a> command is
-        called. The scheduled shutdown starts ASAP, specifically as long as the
-        current command in execution terminates (if any), with a possible additional
-        delay of 0.1 seconds or less.</p>
-        
-        <p>In case the server is blocked by a Lua script that is taking too much time,
-        if the script is killable with <code>SCRIPT KILL</code> the scheduled shutdown will be
-        executed just after the script is killed, or if terminates spontaneously.</p>
-        
-        <p>The Shutdown performed in this condition includes the following actions:</p>
-        
-        <ul>
-        <li>If there is a background child saving the RDB file or performing an AOF rewrite, the child is killed.</li>
-        <li>If the AOF is active, Redis calls the <code>fsync</code> system call on the AOF file descriptor in order to flush the buffers on disk.</li>
-        <li>If Redis is configured to persist on disk using RDB files, a synchronous (blocking) save is performed. Since the save is performed in a synchronous way no additional memory is used.</li>
-        <li>If the server is daemonized, the pid file is removed.</li>
-        <li>If the Unix domain socket is enabled, it gets removed.</li>
-        <li>The server exits with an exit code of zero.</li>
-        </ul>
-        
-        <p>In case the RDB file can&#39;t be saved, the shutdown fails, and the server continues to run in order to ensure no data loss. Since Redis 2.6.11 no further attempt to shut down will be made unless a new <code>SIGTERM</code> will be received or the <a href="/commands/shutdown.html">SHUTDOWN</a> command issued.</p>
-        
-        <h2>Handling of SIGSEGV, SIGBUS, SIGFPE and SIGILL</h2>
-        
-        <p>The following follow signals are handled as a Redis crash:</p>
+          <p>Redis接收到以下几种信号时会崩溃：</p>
         
         <ul>
         <li>SIGSEGV</li>
@@ -58,49 +43,40 @@
         <li>SIGFPE</li>
         <li>SIGILL</li>
         </ul>
-        
-        <p>One one of these signals is trapped, Redis aborts any current operation and performs the following actions:</p>
-        
+        <p>如果以上信号被捕获，Redis会终止所有正在进行的操作，并进行以下操作：</p>
         <ul>
-        <li>A bug report is produced on the log file. This includes a stack trace, dump of registers, and information about the state of clients.</li>
-        <li>Since Redis 2.8 (currently a development version) a fast memory test is performed as a first check of the reliability of the crashing system.</li>
-        <li>If the server was daemonized, the pid file is removed.</li>
-        <li>Finally the server unregisters its own signal handler for the received signal, and sends the same signal again to itself, in order to make sure that the default action is performed, for instance dumping the core on the file system.</li>
+            <li>包括调用栈信息，寄存器信息，以及clients信息会以bug报告的形式写入日志文件。</li>
+            <li>自从Redis2.8（当前为开发版本）之后，Redis会在系统崩溃时进行一个快速的内存检测以保证系统的可靠性。</li>
+            <li>如果Server是守护进程，PID文件会被移除。</li>
+            <li>最后server会取消自己对当前所接收信号的信号处理器的注册，并重新把这个信号发给自己，这是为了保证一些默认的操作被执行，比如把Redis的核心Dump到文件系统。</li>
         </ul>
+        <h2>子进程被终止时会发生什么</h2>
         
-        <h2>What happens when a child process gets killed</h2>
         
-        <p>When the child performing the Append Only File rewrite gets killed by a signal,
-        Redis handles this as an error and discards the (probably partial or corrupted)
-        AOF file. The rewrite will be re-triggered again later.</p>
+        <p>当一个正在进行AOF重写的子进程被信号终止，Redis会把它当成一个错误并丢弃这个AOF文件(可能是部分或者完全损坏)。AOF重写过程会在以后被重新触发。</p>
         
-        <p>When the child performing an RDB save is killed Redis will handle the
-        condition as a more severe error, because while the effect of a lack of
-        AOF file rewrite is a the AOF file enlargement, the effect of failed RDB file
-        creation is lack of durability.</p>
+    
+        <p>当一个正在执行RDB文件保存的子进程被终止Redis会把它当做一个严重的错误，因为AOF重写只会导致AOF文件冗余，但是RDB文件保存失败会导致Redis不可用。</p>
         
-        <p>As a result of the child producing the RDB file being killed by a signal,
-        or when the child exits with an error (non zero exit code), Redis enters
-        a special error condition where no further write command is accepted.</p>
+          <p>
+              如果一个正在保存RDB文件的子进程被信号终止或者自身出现了错误(非0退出码)，Redis会进入一种特殊的错误状态，不允许任何写操作。
+          </p>
+          <ul>
+              <li>Redis会继续回复所有的读请求。</li>
+              <li>Redis会回复给所有的写请求一个<code>MISCONFIG</code>错误。</li>
+          </ul>
+          <p>
+                此错误状态只需被清楚一次就可以进行成功创建数据库文件。
+          </p>
         
-        <ul>
-        <li>Redis will continue to reply to read commands.</li>
-        <li>Redis will reply to all write commands with a <code>MISCONFIG</code> error.</li>
-        </ul>
         
-        <p>This error condition is cleared only once it will be possible to create
-        an RDB file with success.</p>
+          <h2>不触发错误状态的情况下终止RDB文件的保存</h2>
         
-        <h2>Killing the RDB file without triggering an error condition</h2>
         
-        <p>However sometimes the user may want to kill the RDB saving child without
-        generating an error. Since Redis version 2.6.10 this can be done using the
-        special signal <code>SIGUSR1</code> that is handled in a special way:
-        it kills the child process as any other signal, but the parent process will
-        not detect this as a critical error and will continue to serve write
-        requests as usually.</p>
+          <p>但是有时用户希望可以在不触发错误的情况下终止保存RDB文件的子进程。自从Redis2.6.10之后就可以使用信号<code>SIGUSR1</code>，这个信号会被特殊处理：它会像其他信号一样终止子进程，但是父进程不会检测到这个严重的错误，照常接收所有的用户写请求。</p>
       </article>
     </div>
     <script src='/js/foot.js'></script>
-  </body>
+
+</body>
 </html>
