@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -15,50 +14,43 @@
     <script src='/js/head.js'></script>
     <div class='text'>
       <article id='topic'>
-        <h1>Redis configuration</h1>
+        <h1>Redis配置</h1>
         
-        <p>Redis is able to start without a configuration file using a built-in default
-        configuration, however this setup is only recommanded for testing and
-        development purposes.</p>
         
-        <p>The proper way to configure Redis is by providing a Redis configuration file,
-        usually called <code>redis.conf</code>.</p>
+        <p>Redis可以在没有配置文件的情况下通过内建的配置文件来启动，但是这种启动方式只适用于开发和测试。</p>
         
-        <p>The <code>redis.conf</code> file contains a number of directives that have a very simple
-        format:</p>
+        <p>合理的配置Redis的方式是提供一个Redis配置文件，这个文件通常叫做<code>redis.conf</code>。</p>
         
-        <pre><code>keyword argument1 argument2 ... argumentN&#x000A;</code></pre>
+        <p><code>redis.conf</code>文件中包含了很多格式简单的指令如下：</p>
         
-        <p>This is an example of configuration directive:</p>
+        <pre><code>关键字 参数1 参数2 ...参数N&#x000A;</code></pre>
+        
+        <p>如下是一个配置指令的示例：</p>
         
         <pre><code>slaveof 127.0.0.1 6380&#x000A;</code></pre>
         
-        <p>It is possible to provide strings containing spaces as arguments using
-        quotes, as in the following example:</p>
+        <p>也可以通过提供带有空格的字符串，或者带有双引号的参数，如下：</p>
         
         <pre><code>requirepass &quot;hello world&quot;&#x000A;</code></pre>
         
-        <p>The list of configuration directives, and their meaning and intended usage
-        is available in the self documented example redis.conf shipped into the
-        Redis distribution.</p>
+        <p>这些指令的配置，意义以及深入使用方法都能在每个Redis发布版本自带的的redis.conf文档中找到。</p>
         
         <ul>
-        <li>The self documented <a href="https://raw.github.com/antirez/redis/2.6/redis.conf">redis.conf for Redis 2.6</a>.</li>
-        <li>The self documented <a href="https://raw.github.com/antirez/redis/2.4/redis.conf">redis.conf for Redis 2.4</a>.</li>
+        <li>自描述文档<a href="https://raw.github.com/antirez/redis/2.6/redis.conf">redis.conf for Redis 2.6</a>.</li>
+        <li>自描述文档<a href="https://raw.github.com/antirez/redis/2.4/redis.conf">redis.conf for Redis 2.4</a>.</li>
         </ul>
         
-        <h2>Passing arguments via command line</h2>
+        <h2>通过命令行传参</h2>
         
-        <p>Since Redis 2.6 it is possible to also pass Redis configuration parameters
-        using the command line directly. This is very useful for testing purposes.
-        The following is an example that stats a new Redis instance using port 6380
-        as a slave of the instance running at 127.0.0.1 port 6379.</p>
+        <p>自Redis2.6起就可以直接通过命令行传递Redis配置参数。以下是一个例子：这个例子配置一个新运行并以6380为端口的
+        Redis实例，使它成为127.0.0.1:6379Redis实例的slave。
+        </p>
         
         <pre><code>./redis-server --port 6380 --slaveof 127.0.0.1 6379&#x000A;</code></pre>
         
-        <p>The format of the arguments passed via the command line is exactly the same
-        as the one used in the redis.conf file, with the exception that the keyword
-        is prefixed with <code>--</code>.</p>
+        <p>通过命令行传递的配置参数的格式和redis.conf中设置的配置参数的格式完全一样，唯一不同的是需要在关键字之前加上
+        前缀<code>--</code>。
+        </p>
         
         <p>Note that internally this generates an in-memory temporary config file
         (possibly concatenating the config file passed by the user if any) where
