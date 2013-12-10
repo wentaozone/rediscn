@@ -98,9 +98,11 @@
         <p>可以看出使用管道后有了五倍的性能提升。</p>
         
         <h2>管道VS脚本<h2>
-        <p>Using <a href="/commands/eval">Redis scripting</a> (available in Redis version 2.6 or greater) a number of use cases for pipelining can be addressed more efficiently using scripts that perform a lot of the work needed server side. A big advantage of scripting is that it is able to both read and write data with minimal latency, making operations like <em>read, compute, write</em> very fast (pipelining can&#39;t help in this scenario since the client needs the reply of the read command before it can call the write command).</p>
         
-        <p>Sometimes the application may also want to send <a href="/commands/eval">EVAL</a> or <a href="/commands/evalsha">EVALSHA</a> commands in a pipeline. This is entirely possible and Redis explicitly supports it with the <a href="http://redis.io/commands/script-load">SCRIPT LOAD</a> command (it guarantees that <a href="/commands/evalsha">EVALSHA</a> can be called without the risk of failing).</p>
+        <p>由于脚本执行于服务端，所以使用<a href="/commands/eval">Redis脚本</a>（可用于Redis2.6或以上版本）可以使某些原本使用管道的场景执行得更有效率。脚本一个很大的优势在于它的读写操作的延迟相当小，因此能使如<em>read, compute, write</em>之类的操作执行的非常快（管道在这个场景下表现就差强人意，因为管道在执行写之前需要先得到读请求的响应和返回值）。</p>
+        
+  
+        <p>有些时候应用希望可以通过管道发送<a href="/commands/eval">EVLA</a>或者<a href="/commands/evalsha">EVALSHA</a>命令。这也是完全可以做的到的并且Redis通过<a href="http://redis.io/commands/script-load">SCRIPT LOAD</a>命令显式支持这种操作（并保证<a href="/commands/evalsha">EVALSHA</a>操作不会执行失败）。</p>
         
         
       </article>
