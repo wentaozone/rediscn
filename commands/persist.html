@@ -30,17 +30,15 @@
           <p><strong>时间复杂度：</strong> O(1)。</p>
         </div>
         
-        <p>Remove the existing timeout on <code>key</code>, turning the key from <em>volatile</em> (a key
-        with an expire set) to <em>persistent</em> (a key that will never expire as no timeout
-        is associated).</p>
+        <p>移除给定<code>key</code>的生存时间，将这个 key 从『易失的』(带生存时间 key )转换成『持久的』(一个不带生存时间、永不过期的 key )。</p>
         
         <h2>Return value</h2>
         
         <p><a href="/topics/protocol.html#integer-reply">Integer reply</a>, specifically:</p>
         
         <ul>
-        <li><code>1</code> if the timeout was removed.</li>
-        <li><code>0</code> if <code>key</code> does not exist or does not have an associated timeout.</li>
+        <li>当生存时间移除成功时，返回 1 .</li>
+        <li>如果 key 不存在或 key 没有设置生存时间，返回 0 .</li>
         </ul>
         
         <h2>Examples</h2>

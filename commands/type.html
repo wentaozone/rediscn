@@ -30,13 +30,16 @@
           <p><strong>时间复杂度：</strong> O(1)。</p>
         </div>
         
-        <p>Returns the string representation of the type of the value stored at <code>key</code>.
-        The different types that can be returned are: <code>string</code>, <code>list</code>, <code>set</code>, <code>zset</code>
-        and <code>hash</code>.</p>
+        <p>返回 key 所储存的值的类型。</p>
         
-        <h2>Return value</h2>
+        <h2>返回值</h2>
         
-        <p><a href="/topics/protocol.html#status-reply">Status code reply</a>: type of <code>key</code>, or <code>none</code> when <code>key</code> does not exist.</p>
+        <p>none (key不存在)</p>
+        <p>string (字符串)</p>
+        <p>list (列表)</p>
+        <p>set (集合)</p>
+        <p>zset (有序集)</p>
+        <p>hash (哈希表)</p>
         
         <h2>Examples</h2>
         

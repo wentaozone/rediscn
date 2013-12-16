@@ -30,14 +30,13 @@
           <p><strong>时间复杂度：</strong> O(1)。</p>
         </div>
         
-        <p>Returns the remaining time to live of a key that has a timeout.
-        This introspection capability allows a Redis client to check how many seconds a
-        given key will continue to be part of the dataset.</p>
+        <p>以秒为单位，返回给定 key 的剩余生存时间(TTL, time to live)。</p>
         
-        <h2>Return value</h2>
+        <h2>返回值</h2>
         
-        <p><a href="/topics/protocol.html#integer-reply">Integer reply</a>: TTL in seconds, <code>-2</code> when <code>key</code> does not exist or <code>-1</code> when <code>key</code> does not
-        have a timeout.</p>
+        <p>当 key 不存在时，返回 -2 。</p>
+        <p>当 key 存在但没有设置剩余生存时间时，返回 -1 。</p>
+        <p>否则，以秒为单位，返回 key 的剩余生存时间。</p>
         
         <h2>Examples</h2>
         

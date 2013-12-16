@@ -30,16 +30,15 @@
           <p><strong>时间复杂度：</strong> O(1)。</p>
         </div>
         
-        <p><a href="/commands/pexpireat.html">PEXPIREAT</a> has the same effect and semantic as <a href="/commands/expireat.html">EXPIREAT</a>, but the Unix time at
-        which the key will expire is specified in milliseconds instead of seconds.</p>
+        <p><a href="/commands/pexpireat.html">PEXPIREAT</a> 这个命令和 <a href="/commands/expireat.html">EXPIREAT</a>命令类似，但它以毫秒为单位设置 key 的过期 unix 时间戳，而不是像 EXPIREAT 那样，以秒为单位。</p>
         
         <h2>Return value</h2>
         
         <p><a href="/topics/protocol.html#integer-reply">Integer reply</a>, specifically:</p>
         
         <ul>
-        <li><code>1</code> if the timeout was set.</li>
-        <li><code>0</code> if <code>key</code> does not exist or the timeout could not be set (see: <a href="/commands/expire.html">EXPIRE</a>).</li>
+        <li>如果生存时间设置成功，返回 1 。</li>
+        <li>当 key 不存在或没办法设置生存时间时，返回 0 。 (查看: <a href="/commands/expire.html">EXPIRE</a>命令获取更多信息).</li>
         </ul>
         
         <h2>Examples</h2>

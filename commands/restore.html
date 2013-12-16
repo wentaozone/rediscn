@@ -27,21 +27,20 @@
         
         <div class='metadata'>
           <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
-          <p><strong>时间复杂度：</strong> O(1) to create the new key and additional O(N*M) to recostruct the serialized value, where N is the number of Redis objects composing the value and M their average size. For small string values the time complexity is thus O(1)+O(1*M) where M is small, so simply O(1). However for sorted set values the complexity is O(N*M*log(N)) because inserting values into sorted sets is O(log(N))。</p>
+          <p><strong>时间复杂度：</strong> 查找给定键的复杂度为 O(1) ，对键进行反序列化的复杂度为 O(N*M) ，其中 N 是构成 key 的 Redis 对象的数量，而 M 则是这些对象的平均大小。
+有序集合(sorted set)的反序列化复杂度为 O(N*M*log(N)) ，因为有序集合每次插入的复杂度为 O(log(N)) 。
+如果反序列化的对象是比较小的字符串，那么复杂度为 O(1) 。</p>
         </div>
         
-        <p>Create a key associated with a value that is obtained by deserializing the
-        provided serialized value (obtained via <a href="/commands/dump.html">DUMP</a>).</p>
+        <p>反序列化给定的序列化值，并将它和给定的 key 关联。</p>
+        <p>参数 ttl 以毫秒为单位为 key 设置生存时间；如果 ttl 为 0 ，那么不设置生存时间。</p>
+        <p>RESTORE 在执行反序列化之前会先对序列化值的 RDB 版本和数据校验和进行检查，如果 RDB 版本不相同或者数据不完整的话，那么 RESTORE 会拒绝进行反序列化，并返回一个错误。</p>
+     
         
-        <p>If <code>ttl</code> is 0 the key is created without any expire, otherwise the specified
-        expire time (in milliseconds) is set.</p>
+        <h2>返回值</h2>
         
-        <p><a href="/commands/restore.html">RESTORE</a> checks the RDB version and data checksum.
-        If they don&#39;t match an error is returned.</p>
-        
-        <h2>Return value</h2>
-        
-        <p><a href="/topics/protocol.html#status-reply">Status code reply</a>: The command returns OK on success.</p>
+        <p>如果反序列化成功那么返回 OK ，否则返回一个错误。</p>
+
         
         <h2>Examples</h2>
         
